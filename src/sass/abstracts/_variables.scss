@@ -1,0 +1,15 @@
+$color-light: #fff;
+$color-dark: #000;
+
+$color-text-light: #ecf0f1;
+$color-text-dark: #7f8c8d;
+
+$color-primary: #2ecc71;
+$color-primary-light: lighten($color-primary, 15%);
+$color-primary-dark: darken($color-primary, 15%);
+$color-primary-text: $color-text-light;
+
+$color-secondary: #e67e22;
+$color-secondary-light: lighten($color-secondary, 15%);
+$color-secondary-dark: darken($color-secondary, 15%);
+$color-secondary-text: $color-text-light;

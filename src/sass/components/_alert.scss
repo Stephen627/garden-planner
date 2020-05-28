@@ -1,0 +1,11 @@
+.alert {
+    padding: 1rem;
+    text-align: center;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+
+    &--danger {
+        background-color: #e74c3c;
+        color: $color-text-light;
+    }
+}

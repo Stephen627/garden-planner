@@ -1,0 +1,15 @@
+.btn {
+    padding: 1rem;
+    border-radius: 2px;
+    border: none;
+    text-transform: uppercase;
+
+    &--primary {
+        background-color: $color-primary;
+        color: $color-primary-text;
+    }
+    &--secondary {
+        background-color: $color-secondary;
+        color: $color-secondary-text;
+    }
+}

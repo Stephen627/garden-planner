@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    line-height: 120%;
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
+.heading-secondary {
+    text-transform: uppercase;
+}
+
+input:not([type=submit]), select {
+    border: none;
+    padding: 1rem;
+    border-radius: 3px;
+}

@@ -1,0 +1,7 @@
+{
+    "Email": "Email",
+    "auth/invalid-email": "Your email is invalid",
+    "auth/weak-password": "Your password is too weak, it must be at least 6 characters",
+    "auth/email-already-in-use": "That email address is already in use",
+    "auth/wrong-password": "The credentials you entered are incorrect"
+}
