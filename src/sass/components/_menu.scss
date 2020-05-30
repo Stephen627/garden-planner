@@ -1,0 +1,46 @@
+.menu {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: $color-text-dark;
+    background-color: $color-text-light;
+
+    &__top {
+        padding: 2rem 0;
+        background-image: linear-gradient(to bottom right, $color-primary-light, $color-primary-dark);
+        text-align: center;
+        color: $color-text-light;
+    }
+
+    &__list {
+        width: 100%;
+        list-style: none;
+        position: absolute;
+
+        &--bottom {
+            bottom: 0;
+        }
+    }
+
+    &__item {
+        padding: 1.5rem 1rem;
+        cursor: pointer;
+        font-size: 1.6rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        transition: all 0.5s;
+
+        a {
+            width: 100%;
+        }
+
+        i {
+            font-size: 2rem;
+            margin-right: 1rem;
+        }
+
+        &:hover {
+            background-color: darken($color-text-light, 10%);
+        }
+    }
+}

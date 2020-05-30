@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { LOGIN_URL } from '../routes';
 import { Auth } from '../user';
+import { __ } from '../lang';
 
 export interface HeaderProps {
 };
@@ -34,11 +35,31 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
             return <Redirect to={LOGIN_URL} />
         }
 
-        return <header>
-            <nav>
-                <ul>
-                    <li>
-                        <a onClick={this.onSignOutClick}>Sign Out</a>
+        return <header className="header">
+            <nav className="menu">
+                <div className="menu__top">
+                    <h1 className="menu__name">{ __('Garden Planner') }</h1>
+                </div>
+                <ul className="menu__list menu__list--main">
+                    <li className="menu__item">
+                        <a>
+                            <i className="fas fa-tree"></i>
+                            Gardens
+                        </a>
+                    </li>
+                    <li className="menu__item">
+                        <a>
+                            <i className="fas fa-seedling"></i>
+                            Plants
+                        </a>
+                    </li> 
+                </ul>
+                <ul className="menu__list menu__list--bottom">
+                    <li className="menu__item" onClick={this.onSignOutClick}>
+                        <a>
+                            <i className="fas fa-sign-out-alt"></i>
+                            Sign Out
+                        </a>
                     </li>
                 </ul>
             </nav>
