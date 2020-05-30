@@ -5,6 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { __ } from '../lang';
 import { Auth } from '../user';
 import { HOME_URL, LOGIN_URL } from '../routes';
+import { Page } from '../layouts/not-logged-in';
 
 export interface RegisterProps {
 }
@@ -70,7 +71,7 @@ export class Register extends React.Component<RegisterProps, RegisterState> {
             </div>
             : '';
 
-        return <div className="page page--login">
+        return <Page>
             <form className="center-form" onSubmit={this.onFormSubmit}>
                 <div className="center-form__inner">
                     <div className="u-text-center u-margin-bottom-small">
@@ -95,6 +96,6 @@ export class Register extends React.Component<RegisterProps, RegisterState> {
                     <Link to={LOGIN_URL}>&larr; { __('Back to Login') }</Link>
                 </div>
             </form>
-        </div>
+        </Page>
     }
 }

@@ -37,7 +37,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
 
         return <header className="header">
             <nav className="menu">
-                <div className="menu__top">
+                <div className="menu__logo">
                     <h1 className="menu__name">{ __('Garden Planner') }</h1>
                 </div>
                 <ul className="menu__list menu__list--main">
@@ -54,7 +54,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                         </a>
                     </li> 
                 </ul>
-                <ul className="menu__list menu__list--bottom">
+                <ul className="menu__list menu__list--right">
                     <li className="menu__item" onClick={this.onSignOutClick}>
                         <a>
                             <i className="fas fa-sign-out-alt"></i>

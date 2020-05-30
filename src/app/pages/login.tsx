@@ -4,6 +4,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { __ } from '../lang';
 import { Auth } from '../user';
 import { HOME_URL } from '../routes';
+import { Page } from '../layouts/not-logged-in';
 
 export interface LoginProps {
 };
@@ -60,7 +61,7 @@ export class Login extends React.Component<LoginProps, LoginState> {
         </div>
         : '';
 
-        return <div className="page page--login">
+        return <Page>
             <form className="center-form" onSubmit={this.onFormSubmit}>
                 <div className="center-form__inner">
                     <div className="u-text-center u-margin-bottom-small">
@@ -81,6 +82,6 @@ export class Login extends React.Component<LoginProps, LoginState> {
                     <Link to="/register">{ __('Click here to register') }</Link>
                 </div>
             </form>
-        </div>;
+        </Page>;
     }
 }
