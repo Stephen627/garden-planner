@@ -1,10 +1,9 @@
 import * as firebase from 'firebase/app';
 import 'firebase/analytics';
-
-const config = require('../../config');
+import Config from './config';
 
 firebase.initializeApp({
-    apiKey: config['firebase-api-key'],
+    apiKey: Config.get('firebase.api-key'),
     authDomain: "garden-planner-284e2.firebaseapp.com",
     databaseURL: "https://garden-planner-284e2.firebaseio.com",
     projectId: "garden-planner-284e2",
