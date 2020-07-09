@@ -1,20 +1,27 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
+const mode = typeof process.env.NODE_ENV === 'undefined'
+  ? 'production'
+  : process.env.NODE_ENV.trim();
 
 module.exports = {
-    mode: "development",
+    mode,
 
-    // Enable sourcemaps for debugging webpack's output.
-    devtool: "source-map",
+    devtool: mode === 'development' ? 'source-map' : '',
 
-    entry: './src/app',
+    entry: [
+      './src/app',
+      './src/sass/main.scss',
+    ],
 
     output: {
         path: path.resolve(__dirname, 'public', 'assets'),
     },
 
     resolve: {
-        // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
+        extensions: ['.ts', '.tsx', '.js', '.jsx', '.json']
     },
 
     module: {
@@ -24,26 +31,41 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: "ts-loader"
+                        loader: 'ts-loader'
                     }
                 ]
             },
-            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             {
-                enforce: "pre",
-                test: /\.js$/,
-                loader: "source-map-loader"
-            }
+                test: /\.(sa|sc|c)ss$/,
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: mode === 'development'
+                        }
+                    },
+                    'css-loader',
+                    'postcss-loader',
+                    'sass-loader'
+                ],
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                  {
+                      loader: 'file-loader',
+                      options: {
+                          outputPath: 'images',
+                      },
+                  },
+                ],
+            },
         ]
     },
 
-    // When importing a module whose path matches one of the following, just
-    // assume a corresponding global variable exists and use that instead.
-    // This is important because it allows us to avoid bundling all of our
-    // dependencies, which allows browsers to cache those libraries between builds.
     externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
+        'react': 'React',
+        'react-dom': 'ReactDOM'
     },
 
     devServer: {
@@ -56,5 +78,21 @@ module.exports = {
         historyApiFallback: {
           index: 'index.html'
         }
-    }
+    },
+
+    optimization: {
+        mergeDuplicateChunks: true,
+        minimize: mode !== 'development',
+        minimizer: [
+            new TerserPlugin({
+                extractComments: true
+            }),
+        ]
+    },
+
+    plugins: [
+        new MiniCssExtractPlugin({
+          filename: '[name].css'
+        })
+    ]
 };
