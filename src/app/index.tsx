@@ -6,16 +6,19 @@ import {
 } from 'react-router-dom';
 import { pages } from './routes';
 import Loading from './pages/loading';
+import { Auth } from './utils/user';
 
 import './utils/firebase';
 
-ReactDOM.render(
-    <React.Suspense fallback={Loading}>
-        <Router>
-            <Switch>
-                {pages}
-            </Switch>
-        </Router>
-    </React.Suspense>,
-    document.getElementById('app')
-);
+Auth.onAuthChange(() => {
+    ReactDOM.render(
+        <React.Suspense fallback={Loading}>
+            <Router>
+                <Switch>
+                    {pages}
+                </Switch>
+            </Router>
+        </React.Suspense>,
+        document.getElementById('app')
+    );
+})

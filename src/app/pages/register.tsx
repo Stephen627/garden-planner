@@ -47,9 +47,6 @@ class Register extends React.Component<RegisterProps, RegisterState> {
             error: ''
         });
         Auth.register(this.email.current.value, this.password.current.value).then((data: firebase.auth.UserCredential) => {
-            Auth.isAuthenticated = true;
-            Auth.storeUser(data.user);
-            
             this.setState({
                 toDashboard: true
             })

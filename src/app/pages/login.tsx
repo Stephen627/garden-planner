@@ -37,9 +37,6 @@ class Login extends React.Component<LoginProps, LoginState> {
             this.email.current.value,
             this.password.current.value
         ).then((data: firebase.auth.UserCredential) => {
-            Auth.isAuthenticated = true;
-            Auth.storeUser(data.user);
-
             this.setState({
                 toDashboard: true
             });
