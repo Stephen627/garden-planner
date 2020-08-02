@@ -14,7 +14,7 @@ export interface RegisterState {
     toDashboard: boolean
 }
 
-export class Register extends React.Component<RegisterProps, RegisterState> {
+class Register extends React.Component<RegisterProps, RegisterState> {
     protected email: React.RefObject<HTMLInputElement>;
     protected password: React.RefObject<HTMLInputElement>;
     protected confirmPassword: React.RefObject<HTMLInputElement>;
@@ -98,3 +98,5 @@ export class Register extends React.Component<RegisterProps, RegisterState> {
         </Page>
     }
 }
+
+export default Register;

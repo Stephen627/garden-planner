@@ -13,7 +13,7 @@ export interface LoginState {
     error: string
 }
 
-export class Login extends React.Component<LoginProps, LoginState> {
+class Login extends React.Component<LoginProps, LoginState> {
     protected email: React.RefObject<HTMLInputElement>;
     protected password: React.RefObject<HTMLInputElement>;
 
@@ -85,3 +85,5 @@ export class Login extends React.Component<LoginProps, LoginState> {
         </Page>;
     }
 }
+
+export default Login;

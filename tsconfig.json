@@ -3,8 +3,10 @@
         "outDir": "./public/assets/",
         "sourceMap": true,
         "noImplicitAny": true,
-        "module": "commonjs",
+        "module": "esnext",
+        "removeComments": false,
         "target": "es6",
+        "moduleResolution": "node",
         "jsx": "react"
     }
 }

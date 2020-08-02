@@ -1,6 +1,9 @@
 const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const mode = typeof process.env.NODE_ENV === 'undefined'
   ? 'production'
@@ -17,7 +20,9 @@ module.exports = {
     ],
 
     output: {
-        path: path.resolve(__dirname, 'public', 'assets'),
+        path: path.resolve(__dirname, 'public'),
+        publicPath: '/',
+        chunkFilename: '[name].[contenthash:8].bundle.js'
     },
 
     resolve: {
@@ -41,7 +46,9 @@ module.exports = {
                     {
                         loader: MiniCssExtractPlugin.loader,
                         options: {
-                            hmr: mode === 'development'
+                            hmr: mode === 'development',
+                            publicPath: '/',
+                            esModule: true
                         }
                     },
                     'css-loader',
@@ -63,36 +70,50 @@ module.exports = {
         ]
     },
 
-    externals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM'
-    },
-
     devServer: {
         contentBase: path.resolve(__dirname, 'public'),
-        publicPath: '/assets/',
         watchContentBase: true,
         compress: true,
         hot: true,
-        port: 9000,
-        historyApiFallback: {
-          index: 'index.html'
-        }
+        port: 80,
+        historyApiFallback: true,
     },
 
     optimization: {
+        moduleIds: 'hashed',
+        runtimeChunk: 'single',
         mergeDuplicateChunks: true,
         minimize: mode !== 'development',
         minimizer: [
             new TerserPlugin({
                 extractComments: true
             }),
-        ]
+        ],
     },
 
     plugins: [
+        //new BundleAnalyzerPlugin(),
+        new HtmlWebpackPlugin({
+            'meta': {
+                //'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': 'default-src https:' },
+                'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
+                'theme-color': '#2ecc71'
+            },
+            title: 'Garden Planner | Stephen James',
+            template: 'src/index.html',
+            scriptLoading: 'defer',
+            excludeChunks: [
+                'pages/register',
+                'pages/my-account',
+                'pages/login',
+                'pages/register',
+                'pages/dashboard',
+            ]
+        }),
+        new webpack.HashedModuleIdsPlugin(),
         new MiniCssExtractPlugin({
-          filename: '[name].css'
-        })
+          filename: '[name].css',
+          chunkFilename: '[name].css'
+        }),
     ]
 };

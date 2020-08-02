@@ -5,8 +5,10 @@ export interface MyAccountProps {
 
 }
 
-export const MyAccount = (props: MyAccountProps) => {
+const MyAccount = (props: MyAccountProps) => {
     return <Page>
         <h1>Your Account</h1>
     </Page>
 }
+
+export default MyAccount;

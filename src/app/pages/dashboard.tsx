@@ -12,7 +12,7 @@ export interface DashboardState {
     height: number;
 }
 
-export class Dashboard extends React.Component<DashboardProps, DashboardState> {
+class Dashboard extends React.Component<DashboardProps, DashboardState> {
 
     constructor (props: DashboardProps) {
         super(props);
@@ -56,3 +56,5 @@ export class Dashboard extends React.Component<DashboardProps, DashboardState> {
         </Page>
     }
 };
+
+export default Dashboard;

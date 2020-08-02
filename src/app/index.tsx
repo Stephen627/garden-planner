@@ -5,14 +5,17 @@ import {
     Switch
 } from 'react-router-dom';
 import { pages } from './routes';
+import Loading from './pages/loading';
 
 import './utils/firebase';
 
 ReactDOM.render(
-    <Router>
-        <Switch>
-            {pages}
-        </Switch>
-    </Router>,
+    <React.Suspense fallback={Loading}>
+        <Router>
+            <Switch>
+                {pages}
+            </Switch>
+        </Router>
+    </React.Suspense>,
     document.getElementById('app')
 );
