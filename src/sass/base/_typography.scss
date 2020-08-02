@@ -21,5 +21,12 @@ body {
 input:not([type=submit]), select {
     border: none;
     padding: 1rem;
-    border-radius: 3px;
+    background: transparent;
+    color: $color-text-dark;
+    font-size: 1.8rem;
+    border-bottom: 1px solid $color-text-dark;
+
+    &::placeholder {
+        text-transform: uppercase;
+    }
 }

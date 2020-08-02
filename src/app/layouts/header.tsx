@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import { LOGIN_URL } from '../routes';
-import { Auth } from '../user';
-import { __ } from '../lang';
+import { LOGIN_URL, PLANTS_URL, GARDEN_URL, ACCOUNT_URL } from '../routes';
+import { Auth } from '../utils/user';
+import { __ } from '../utils/lang';
 
 export interface HeaderProps {
 };
@@ -44,13 +44,13 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                     <li className="menu__item">
                         <a>
                             <i className="fas fa-tree"></i>
-                            Gardens
+                            <Link to={GARDEN_URL}>Gardens</Link>
                         </a>
                     </li>
                     <li className="menu__item">
                         <a>
                             <i className="fas fa-seedling"></i>
-                            Plants
+                            <Link to={PLANTS_URL}>Plants</Link>
                         </a>
                     </li> 
                 </ul>
@@ -59,6 +59,12 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                         <a>
                             <i className="fas fa-sign-out-alt"></i>
                             Sign Out
+                        </a>
+                    </li>
+                    <li className="menu__item">
+                        <a>
+                            <i className="fas fa-user"></i>
+                            <Link to={ACCOUNT_URL}>My Account</Link>
                         </a>
                     </li>
                 </ul>

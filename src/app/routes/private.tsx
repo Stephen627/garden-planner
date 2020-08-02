@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
 import { LOGIN_URL } from './index';
-import { Auth } from '../user';
+import { Auth } from '../utils/user';
 
 export interface PrivateRouteProps {
     path: string,

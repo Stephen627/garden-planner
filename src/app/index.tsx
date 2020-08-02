@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import { pages } from './routes';
 
-import './firebase';
+import './utils/firebase';
 
 ReactDOM.render(
     <Router>

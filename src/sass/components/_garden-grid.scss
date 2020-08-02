@@ -1,0 +1,16 @@
+.garden-grid {
+    width: 78vw;
+    height: 95vh;
+    overflow: auto;
+    white-space: nowrap;
+
+    &__row {
+        display: inline-block;
+    }
+
+    &__cell {
+        border: 1px solid $color-dark;
+        width: 5rem;
+        height: 5rem;
+    }
+}

@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import { Redirect, Link } from 'react-router-dom';
 
-import { __ } from '../lang';
-import { Auth } from '../user';
+import { __ } from '../utils/lang';
+import { Auth } from '../utils/user';
 import { HOME_URL, LOGIN_URL } from '../routes';
 import { Page } from '../layouts/not-logged-in';
 
@@ -79,21 +79,20 @@ export class Register extends React.Component<RegisterProps, RegisterState> {
                     </div>
                     { error }
                     <div className="center-form__group">
-                        <label>{ __('Email') }</label>
-                        <input type="email" name="email" ref={this.email} />
+                        <input placeholder={__('Email')} type="email" name="email" ref={this.email} />
                     </div>
                     <div className="center-form__group">
-                        <label>{ __('Password') }</label>
-                        <input type="password" name="password" ref={this.password} />
+                        <input placeholder={__('Password')} type="password" name="password" ref={this.password} />
                     </div>
                     <div className="center-form__group">
-                        <label>{ __('Confirm Password') }</label>
-                        <input type="password" name="password-confirm" ref={this.confirmPassword} />
+                        <input placeholder={__('Confirm Password')} type="password" name="password-confirm" ref={this.confirmPassword} />
                     </div>
                     <div className="u-margin-bottom-small u-margin-top-small">
                         <input className="btn btn--secondary" type="submit" value={ __('Register') } />
                     </div>
-                    <Link to={LOGIN_URL}>&larr; { __('Back to Login') }</Link>
+                    <div className="u-text-center">
+                        <Link to={LOGIN_URL}>&larr; { __('Back to Login') }</Link>
+                    </div>
                 </div>
             </form>
         </Page>

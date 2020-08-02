@@ -1,5 +1,5 @@
 
-const config = require('../../config.json');
+const config = require('../../../config.json');
 
 class Config {
     private static instance: Config;

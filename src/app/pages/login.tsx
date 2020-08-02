@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import { __ } from '../lang';
-import { Auth } from '../user';
+import { __ } from '../utils/lang';
+import { Auth } from '../utils/user';
 import { HOME_URL } from '../routes';
 import { Page } from '../layouts/not-logged-in';
 
@@ -69,17 +69,17 @@ export class Login extends React.Component<LoginProps, LoginState> {
                     </div>
                     { error }
                     <div className="center-form__group">
-                        <label>{ __('Email') }</label>
-                        <input type="email" name="email" ref={this.email} />
+                        <input placeholder={__('Email')} type="email" name="email" ref={this.email} />
                     </div>
                     <div className="center-form__group">
-                        <label>{ __('Password') }</label>
-                        <input type="password" name="password" ref={this.password} />
+                        <input placeholder={__('Password')} type="password" name="password" ref={this.password} />
                     </div>
                     <div className="u-margin-top-small u-margin-bottom-small">
                         <input className="btn btn--secondary" type="submit" value={ __('Login') } />
                     </div>
-                    <Link to="/register">{ __('Click here to register') }</Link>
+                    <div className="u-text-center">
+                        <Link to="/register">{ __('Click here to register') }</Link>
+                    </div>
                 </div>
             </form>
         </Page>;
