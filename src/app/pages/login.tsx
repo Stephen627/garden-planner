@@ -48,7 +48,7 @@ class Login extends React.Component<LoginProps, LoginState> {
     }
 
     render () {
-        if (this.state.toDashboard) {
+        if (this.state.toDashboard || Auth.isAuthenticated()) {
             return <Redirect to={HOME_URL} />;
         }
 

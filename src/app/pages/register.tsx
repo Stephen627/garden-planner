@@ -58,7 +58,7 @@ class Register extends React.Component<RegisterProps, RegisterState> {
     }
 
     render () {
-        if (this.state.toDashboard) {
+        if (this.state.toDashboard || Auth.isAuthenticated()) {
             return <Redirect to={HOME_URL} />
         }
 
