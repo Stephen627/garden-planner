@@ -4,6 +4,7 @@ import { Redirect, Link } from 'react-router-dom';
 
 import { __ } from '../utils/lang';
 import { Auth } from '../utils/user';
+import AuthError from '../utils/authenticator/auth-error-interface';
 import { HOME_URL, LOGIN_URL } from '../routes';
 import { Page } from '../layouts/not-logged-in';
 
@@ -46,11 +47,11 @@ class Register extends React.Component<RegisterProps, RegisterState> {
         this.setState({
             error: ''
         });
-        Auth.register(this.email.current.value, this.password.current.value).then((data: firebase.auth.UserCredential) => {
+        Auth.register(this.email.current.value, this.password.current.value).then(() => {
             this.setState({
                 toDashboard: true
             })
-        }).catch((err: firebase.auth.AuthError) => {
+        }).catch((err: AuthError) => {
             this.setState({
                 error: __(err.code)
             });

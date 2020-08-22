@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { __ } from '../utils/lang';
 import { Auth } from '../utils/user';
+import AuthError from '../utils/authenticator/auth-error-interface';
 import { HOME_URL } from '../routes';
 import { Page } from '../layouts/not-logged-in';
 
@@ -36,11 +37,11 @@ class Login extends React.Component<LoginProps, LoginState> {
         Auth.authenticate(
             this.email.current.value,
             this.password.current.value
-        ).then((data: firebase.auth.UserCredential) => {
+        ).then(() => {
             this.setState({
                 toDashboard: true
             });
-        }).catch((err: firebase.auth.AuthError) => {
+        }).catch((err: AuthError) => {
             this.setState({
                 error: __(err.code)
             });
