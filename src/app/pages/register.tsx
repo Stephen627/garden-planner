@@ -12,32 +12,56 @@ export interface RegisterProps {
 }
 export interface RegisterState {
     error: string,
-    toDashboard: boolean
+    toDashboard: boolean,
+    email: string,
+    password: string,
+    confirmPassword: string
 }
 
 class Register extends React.Component<RegisterProps, RegisterState> {
-    protected email: React.RefObject<HTMLInputElement>;
-    protected password: React.RefObject<HTMLInputElement>;
-    protected confirmPassword: React.RefObject<HTMLInputElement>;
 
     constructor (props: RegisterProps) {
         super(props);
 
         this.onFormSubmit = this.onFormSubmit.bind(this);
-        this.email = React.createRef();
-        this.password = React.createRef();
-        this.confirmPassword = React.createRef();
+        this.onEmailChange = this.onEmailChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.onConfirmPasswordChange = this.onConfirmPasswordChange.bind(this);
 
         this.state = {
             error: '',
-            toDashboard: false
+            toDashboard: false,
+            email: '',
+            password: '',
+            confirmPassword: ''
         };
+    }
+
+    onEmailChange (evt: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({
+            ...this.state,
+            email: evt.target.value
+        });
+    }
+
+    onPasswordChange (evt: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({
+            ...this.state,
+            password: evt.target.value
+        });
+    }
+    
+    onConfirmPasswordChange (evt: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({
+            ...this.state,
+            confirmPassword: evt.target.value
+        });
     }
 
     onFormSubmit (evt: React.FormEvent<HTMLFormElement>) {
         evt.preventDefault();
 
-        if (this.password.current.value !== this.confirmPassword.current.value) {
+        if (this.state.password !== this.state.confirmPassword) {
             this.setState({
                 error: __('Your passwords do not match')
             });
@@ -47,7 +71,7 @@ class Register extends React.Component<RegisterProps, RegisterState> {
         this.setState({
             error: ''
         });
-        Auth.register(this.email.current.value, this.password.current.value).then(() => {
+        Auth.register(this.state.email, this.state.password).then(() => {
             this.setState({
                 toDashboard: true
             })
@@ -77,13 +101,31 @@ class Register extends React.Component<RegisterProps, RegisterState> {
                     </div>
                     { error }
                     <div className="center-form__group">
-                        <input placeholder={__('Email')} type="email" name="email" ref={this.email} />
+                        <input
+                            placeholder={__('Email')}
+                            type="email"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.onEmailChange}
+                        />
                     </div>
                     <div className="center-form__group">
-                        <input placeholder={__('Password')} type="password" name="password" ref={this.password} />
+                        <input
+                            placeholder={__('Password')}
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.onPasswordChange}
+                        />
                     </div>
                     <div className="center-form__group">
-                        <input placeholder={__('Confirm Password')} type="password" name="password-confirm" ref={this.confirmPassword} />
+                        <input
+                            placeholder={__('Confirm Password')}
+                            type="password"
+                            name="password-confirm"
+                            value={this.state.confirmPassword}
+                            onChange={this.onConfirmPasswordChange}
+                        />
                     </div>
                     <div className="u-margin-bottom-small u-margin-top-small">
                         <input className="btn btn--secondary" type="submit" value={ __('Register') } />

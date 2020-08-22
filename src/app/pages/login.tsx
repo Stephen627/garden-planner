@@ -11,32 +11,48 @@ export interface LoginProps {
 };
 export interface LoginState {
     toDashboard: boolean,
-    error: string
+    error: string,
+    email: string,
+    password: string
 }
 
 class Login extends React.Component<LoginProps, LoginState> {
-    protected email: React.RefObject<HTMLInputElement>;
-    protected password: React.RefObject<HTMLInputElement>;
 
     constructor (props: LoginProps) {
         super(props);
 
         this.onFormSubmit = this.onFormSubmit.bind(this);
-        this.email = React.createRef();
-        this.password = React.createRef();
+        this.onEmailChange = this.onEmailChange.bind(this);
+        this.onPasswordChange = this.onPasswordChange.bind(this);
 
         this.state = {
             toDashboard: false,
-            error: ''
+            error: '',
+            email: '',
+            password: ''
         }
+    }
+
+    onEmailChange (evt: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({
+            ...this.state,
+            email: evt.target.value
+        });
+    }
+
+    onPasswordChange (evt: React.ChangeEvent<HTMLInputElement>) {
+        this.setState({
+            ...this.state,
+            password: evt.target.value
+        });
     }
 
     onFormSubmit (evt: React.FormEvent<HTMLFormElement>) {
         evt.preventDefault();
 
         Auth.authenticate(
-            this.email.current.value,
-            this.password.current.value
+            this.state.email,
+            this.state.password
         ).then(() => {
             this.setState({
                 toDashboard: true
@@ -67,10 +83,22 @@ class Login extends React.Component<LoginProps, LoginState> {
                     </div>
                     { error }
                     <div className="center-form__group">
-                        <input placeholder={__('Email')} type="email" name="email" ref={this.email} />
+                        <input
+                            placeholder={__('Email')}
+                            type="email"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.onEmailChange}
+                        />
                     </div>
                     <div className="center-form__group">
-                        <input placeholder={__('Password')} type="password" name="password" ref={this.password} />
+                        <input
+                            placeholder={__('Password')}
+                            type="password"
+                            name="password"
+                            value={this.state.password}
+                            onChange={this.onPasswordChange}
+                        />
                     </div>
                     <div className="u-margin-top-small u-margin-bottom-small">
                         <input className="btn btn--secondary" type="submit" value={ __('Login') } />
