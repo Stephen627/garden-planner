@@ -10,12 +10,3 @@
     background-position: center;
     }
 }
-
-.dashboard {
-    @include clearfix;
-    
-    & > * {
-        display: block;
-        float: left;
-    }
-}

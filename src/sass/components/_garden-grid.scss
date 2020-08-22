@@ -1,11 +1,30 @@
+.garden {
+    display: flex;
+    flex-direction: row;
+
+    .settings {
+        flex-basis: 20%;
+        height: 94.8vh;
+    }
+
+    .garden-grid {
+        flex-grow: 1;
+        max-width: 80%;
+        max-height: 94.8vh;
+    }
+}
+
 .garden-grid {
-    width: 78vw;
-    height: 95vh;
     overflow: auto;
-    white-space: nowrap;
+
+    &__inner {
+        padding: 2.5rem;
+        width: max-content;
+    }
 
     &__row {
-        display: inline-block;
+        display: flex;
+        flex-direction: row;
     }
 
     &__cell {

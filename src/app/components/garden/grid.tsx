@@ -4,6 +4,7 @@ import { Cell } from './cell';
 export interface GardenGridProps {
     width: number;
     height: number;
+    defaultCellContents?: CellContent[][];
 };
 
 export interface CellContent {
@@ -21,7 +22,7 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
         super(props);
 
         this.state = {
-            cellContents: []
+            cellContents: props.defaultCellContents ? props.defaultCellContents : []
         };
     }
 
@@ -30,9 +31,9 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
         const { cellContents } = this.state;
         const rows = [];
 
-        for (let i = 0; i < width; i++) {
+        for (let i = 0; i < height; i++) {
             const cells = [];
-            for (let j = 0; j < height; j++) {
+            for (let j = 0; j < width; j++) {
                 const content: CellContent = typeof cellContents[i] === 'undefined' || typeof cellContents[i][j] === 'undefined' ? {
                     background: null,
                     plant: null
@@ -41,6 +42,6 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
             }
             rows.push(<div className="garden-grid__row">{cells}</div>);
         }
-        return <div className="garden-grid">{rows}</div>
+        return <div className="garden-grid"><div className="garden-grid__inner">{rows}</div></div>
     }
 }
