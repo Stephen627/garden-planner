@@ -6,6 +6,7 @@ import { Auth } from '../utils/user';
 import AuthError from '../utils/authenticator/auth-error-interface';
 import { HOME_URL } from '../routes';
 import { Page } from '../layouts/not-logged-in';
+import Form from '../components/form';
 
 export interface LoginProps {
 };
@@ -76,38 +77,26 @@ class Login extends React.Component<LoginProps, LoginState> {
         : '';
 
         return <Page>
-            <form className="center-form" onSubmit={this.onFormSubmit}>
+            <Form className="center-form" onSubmit={this.onFormSubmit}>
                 <div className="center-form__inner">
                     <div className="u-text-center u-margin-bottom-small">
                         <h2 className="heading-secondary">{ __('Login') }</h2>
                     </div>
                     { error }
-                    <div className="center-form__group">
-                        <input
-                            placeholder={__('Email')}
-                            type="email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.onEmailChange}
-                        />
-                    </div>
-                    <div className="center-form__group">
-                        <input
-                            placeholder={__('Password')}
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.onPasswordChange}
-                        />
-                    </div>
+                    <Form.Group className="center-form__group">
+                        <Form.Email placeholder={__('Email')} name="email" value={this.state.email} onChange={this.onEmailChange} />
+                    </Form.Group>
+                    <Form.Group className="center-form__group">
+                        <Form.Password placeholder={__('Password')} name="password" value={this.state.password} onChange={this.onPasswordChange} />
+                    </Form.Group>
                     <div className="u-margin-top-small u-margin-bottom-small">
-                        <input className="btn btn--secondary" type="submit" value={ __('Login') } />
+                        <Form.Submit className="btn btn--secondary" value={__('Login')} />
                     </div>
                     <div className="u-text-center">
                         <Link to="/register">{ __('Click here to register') }</Link>
                     </div>
                 </div>
-            </form>
+            </Form>
         </Page>;
     }
 }

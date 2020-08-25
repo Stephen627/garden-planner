@@ -7,6 +7,7 @@ import { Auth } from '../utils/user';
 import AuthError from '../utils/authenticator/auth-error-interface';
 import { HOME_URL, LOGIN_URL } from '../routes';
 import { Page } from '../layouts/not-logged-in';
+import Form from '../components/form';
 
 export interface RegisterProps {
 }
@@ -94,47 +95,29 @@ class Register extends React.Component<RegisterProps, RegisterState> {
             : '';
 
         return <Page>
-            <form className="center-form" onSubmit={this.onFormSubmit}>
+            <Form className="center-form" onSubmit={this.onFormSubmit}>
                 <div className="center-form__inner">
                     <div className="u-text-center u-margin-bottom-small">
                         <h2 className="heading-secondary">{ __('Register') }</h2>
                     </div>
                     { error }
-                    <div className="center-form__group">
-                        <input
-                            placeholder={__('Email')}
-                            type="email"
-                            name="email"
-                            value={this.state.email}
-                            onChange={this.onEmailChange}
-                        />
-                    </div>
-                    <div className="center-form__group">
-                        <input
-                            placeholder={__('Password')}
-                            type="password"
-                            name="password"
-                            value={this.state.password}
-                            onChange={this.onPasswordChange}
-                        />
-                    </div>
-                    <div className="center-form__group">
-                        <input
-                            placeholder={__('Confirm Password')}
-                            type="password"
-                            name="password-confirm"
-                            value={this.state.confirmPassword}
-                            onChange={this.onConfirmPasswordChange}
-                        />
-                    </div>
-                    <div className="u-margin-bottom-small u-margin-top-small">
-                        <input className="btn btn--secondary" type="submit" value={ __('Register') } />
+                    <Form.Group className="center-form__group">
+                        <Form.Email placeholder={__('Email')} name="email" value={this.state.email} onChange={this.onEmailChange} />
+                    </Form.Group>
+                    <Form.Group className="center-form__group">
+                        <Form.Password placeholder={__('Password')} name="password" value={this.state.password} onChange={this.onPasswordChange} />
+                    </Form.Group>
+                    <Form.Group className="center-form__group">
+                        <Form.Password placeholder={__('Confirm Password')} name="password" value={this.state.confirmPassword} onChange={this.onConfirmPasswordChange} />
+                    </Form.Group>
+                    <div className="u-margin-top-small u-margin-bottom-small">
+                        <Form.Submit className="btn btn--secondary" value={__('Register')} />
                     </div>
                     <div className="u-text-center">
                         <Link to={LOGIN_URL}>&larr; { __('Back to Login') }</Link>
                     </div>
                 </div>
-            </form>
+            </Form>
         </Page>
     }
 }
