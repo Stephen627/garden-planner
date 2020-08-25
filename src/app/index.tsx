@@ -32,9 +32,7 @@ const App = () => {
     </React.Suspense>;
 }
 
-Auth.onAuthChange(() => {
-    ReactDOM.render(
-        <App/>,
-        document.getElementById('app')
-    );
-})
+ReactDOM.render(
+    <App/>,
+    document.getElementById('app')
+);
