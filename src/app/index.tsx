@@ -5,6 +5,10 @@ import {
     BrowserRouter as Router,
     Switch
 } from 'react-router-dom';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { Provider  } from 'react-redux';
+import { createStore  } from 'redux';
+import reducers from './reducers';
 import { pages } from './routes';
 import Loading from './pages/loading';
 import { Auth } from './utils/user';
@@ -32,7 +36,13 @@ const App = () => {
     </React.Suspense>;
 }
 
+const store = createStore(
+    reducers,
+    composeWithDevTools()
+);
 ReactDOM.render(
-    <App/>,
+    <Provider store={store}>
+        <App/>
+    </Provider>,
     document.getElementById('app')
 );
