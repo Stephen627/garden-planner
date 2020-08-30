@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { PrivateRoute } from './private';
+import Gardens from '../pages/gardens';
 
 const Register = React.lazy(() => import(/* webpackChunkName: 'pages/register' */ '../pages/register'));
 const Login = React.lazy(() => import(/* webpackChunkName: 'pages/login' */ '../pages/login'));
@@ -18,6 +19,7 @@ export const pages = [
     <Route path={REGISTER_URL} render={() => <Register/>}></Route>,
     <Route path={LOGIN_URL} render={() => <Login/>}></Route>,
     <PrivateRoute path={ACCOUNT_URL} render={() => <MyAccount/>}></PrivateRoute>,
+    <PrivateRoute path={GARDEN_URL} render={() => <Gardens/>}></PrivateRoute>,
     <PrivateRoute path={HOME_URL} render={() => <Dashboard/>}></PrivateRoute>,
     <Redirect to={HOME_URL} />, // If no routes are matched then redirect the user to the home page
 ];
