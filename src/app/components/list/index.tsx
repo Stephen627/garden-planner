@@ -2,13 +2,13 @@ import * as React from 'react';
 import { Item } from './item';
 
 export interface ListProps {
-    items: Array<React.ReactNode>;
+    children: any;
     paginate?: boolean;
     topPaginate?: boolean;
     bottomPaginate?: boolean;
 };
 
-export class List extends React.Component<ListProps> {
+class List extends React.Component<ListProps> {
     constructor (props: ListProps) {
         super(props);
 
@@ -25,6 +25,11 @@ export class List extends React.Component<ListProps> {
     }
 
     render () {
-        return <ul>{this.props.items}</ul>
+        return <ul>{this.props.children}</ul>
     }
 }
+
+export {
+    Item
+}
+export default List;

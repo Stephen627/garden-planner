@@ -19,7 +19,6 @@ export const getGardens = (userID: string) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));
         db.get(`gardens/${userID}`).then((data: Garden[]) => {
-            console.log(data);
             dispatch(setGardens(data));
             dispatch(setLoading(false));
         });

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Garden from '../utils/database/garden';
 import { getGardens } from '../actions/gardens';
 import { Auth } from '../utils/user';
+import List, { Item } from '../components/list';
 
 export interface GardensProps {
     gardens: Garden[];
@@ -18,8 +19,17 @@ class Gardens extends React.Component<GardensProps> {
     }
 
     render () {
+        const gardens = this.props.gardens.map((item: Garden) => {
+            return <Item>
+                {item.name}
+            </Item>
+        });
+
         return <Page>
             <h1>Gardens</h1>
+            <List>
+                {gardens}
+            </List>
         </Page>
     }
 }
