@@ -37,10 +37,9 @@ const App = () => {
     </React.Suspense>;
 }
 
-console.log('test');
 const store = createStore(
     reducers,
-    applyMiddleware(thunk)
+    composeWithDevTools(applyMiddleware(thunk))
 );
 ReactDOM.render(
     <Provider store={store}>

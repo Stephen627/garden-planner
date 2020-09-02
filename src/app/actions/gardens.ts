@@ -7,11 +7,21 @@ export interface GardensState {
     list: Garden[]
 }
 
-export const SET_GARDENS = 'GET_GARDENS';
+export const SET_GARDENS = 'SET_GARDENS';
 export const setGardens = (gardens: Garden[]): Payload => {
     return {
         type: SET_GARDENS,
         data: gardens
+    }
+}
+
+export const updateGardens = (userID: string, gardens: Garden[]) => {
+    return (dispatch: Function) => {
+        dispatch(setLoading(true));
+        db.set(`gardens/${userID}`, gardens).then(() => {
+            dispatch(getGardens(userID));
+            dispatch(setLoading(false));
+        });
     }
 }
 

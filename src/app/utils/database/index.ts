@@ -12,8 +12,8 @@ class Database {
         return this.adapter.get(ref);
     }
 
-    public set (ref: string, data: any): void {
-        this.adapter.set(ref, data);
+    public set (ref: string, data: any): Promise<any> {
+        return this.adapter.set(ref, data);
     }
 }
 
