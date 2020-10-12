@@ -25,6 +25,9 @@ class List extends React.Component<ListProps> {
     }
 
     render () {
+        if (!this.props.children.length) {
+            return <div className="list--empty">There are no items in the list</div>
+        }
         return <ul className="list">{this.props.children}</ul>
     }
 }
