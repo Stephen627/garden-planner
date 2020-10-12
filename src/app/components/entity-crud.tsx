@@ -111,7 +111,7 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
         });
         return <div>
             <h1>{this.props.entityNamePlural}</h1>
-            <a onClick={this.onCreateClick} className="btn btn--primary">Add new {this.props.entityNameSingular}</a>
+            <a onClick={this.onCreateClick} className="btn btn--create btn--primary"></a>
             <List>
                 {items}
             </List>

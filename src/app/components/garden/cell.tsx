@@ -7,5 +7,5 @@ export interface CellProps {
 }
 
 export const Cell = (props: CellProps) => {
-    return <div key={props.key} className="garden-grid__cell"></div>
+    return <div className="garden-grid__cell"></div>
 }

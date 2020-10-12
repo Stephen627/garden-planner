@@ -40,7 +40,7 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
                 } : cellContents[i][j];
                 cells[j] = <Cell key={`${i}x${j}`} {...content}></Cell>;
             }
-            rows.push(<div className="garden-grid__row">{cells}</div>);
+            rows.push(<div key={i} className="garden-grid__row">{cells}</div>);
         }
         return <div className="garden-grid"><div className="garden-grid__inner">{rows}</div></div>
     }

@@ -4,13 +4,34 @@
     border: none;
     text-transform: uppercase;
     cursor: pointer;
+    transition-duration: .5s;
 
     &--primary {
         background-color: $color-primary;
         color: $color-primary-text;
+
+        &:hover {
+            background-color: darken($color-primary, 15%);
+            color: $color-primary-text;
+        }
     }
     &--secondary {
         background-color: $color-secondary;
         color: $color-secondary-text;
+    }
+    &--create {
+        position: absolute;
+        right: 5rem;
+        bottom: 5rem;
+        border-radius: 25rem;
+        font-size: 5rem;
+        padding: 0;
+        width: 65px;
+        height: 65px;
+        text-align: center;
+
+        &:after {
+            content: '+';
+        }
     }
 }
