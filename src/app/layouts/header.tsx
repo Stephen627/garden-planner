@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import { LOGIN_URL, PLANTS_URL, GARDEN_URL, ACCOUNT_URL } from '../routes';
+import { LOGIN_URL, PLANTS_URL, GARDENS_URL, ACCOUNT_URL } from '../routes';
 import { Auth } from '../utils/user';
 import { __ } from '../utils/lang';
 
@@ -42,30 +42,18 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                 </div>
                 <ul className="menu__list menu__list--main">
                     <li className="menu__item">
-                        <a>
-                            <i className="fas fa-tree"></i>
-                            <Link to={GARDEN_URL}>Gardens</Link>
-                        </a>
+                        <Link to={GARDENS_URL}>Gardens</Link>
                     </li>
                     <li className="menu__item">
-                        <a>
-                            <i className="fas fa-seedling"></i>
-                            <Link to={PLANTS_URL}>Plants</Link>
-                        </a>
+                        <Link to={PLANTS_URL}>Plants</Link>
                     </li> 
                 </ul>
                 <ul className="menu__list menu__list--right">
                     <li className="menu__item" onClick={this.onSignOutClick}>
-                        <a>
-                            <i className="fas fa-sign-out-alt"></i>
-                            Sign Out
-                        </a>
+                        Sign Out
                     </li>
                     <li className="menu__item">
-                        <a>
-                            <i className="fas fa-user"></i>
-                            <Link to={ACCOUNT_URL}>My Account</Link>
-                        </a>
+                        <Link to={ACCOUNT_URL}>My Account</Link>
                     </li>
                 </ul>
             </nav>

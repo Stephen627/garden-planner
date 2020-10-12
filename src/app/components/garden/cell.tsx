@@ -3,8 +3,9 @@ import * as React from 'react';
 export interface CellProps {
     background: string;
     plant: string;
+    key: any;
 }
 
 export const Cell = (props: CellProps) => {
-    return <div className="garden-grid__cell"></div>
+    return <div key={props.key} className="garden-grid__cell"></div>
 }

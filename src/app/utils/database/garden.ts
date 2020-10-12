@@ -1,4 +1,6 @@
 
 export default interface Garden {
-    name: string
+    name: string;
+    width: number;
+    height: number;
 }

@@ -5,16 +5,19 @@ import { LOGIN_URL } from './index';
 import { Auth } from '../utils/user';
 
 export interface PrivateRouteProps {
-    path: string,
+    component: React.ReactNode;
+    path: string;
 };
 
-export const PrivateRoute = (props: any, ...rest: any[]) => {
+export const PrivateRoute = (props: any) => {
+    const { component, ...rest } = props;
+    
+    if (!Auth.isAuthenticated()) {
+        return <Redirect to={{ pathname: LOGIN_URL }} />
+    }
+
     return <Route
         {...rest}
-        render={
-            ({location}) => Auth.isAuthenticated()
-                ? (props.render())
-                : ( <Redirect to={{ pathname: LOGIN_URL, state: { from: location }}} /> )
-        }
-    />;
+        component={component}
+    ></Route>;
 }

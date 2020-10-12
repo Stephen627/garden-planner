@@ -28,13 +28,13 @@ const App = () => {
         return <Loading/>;
     }
 
-    return <React.Suspense fallback={Loading}>
-        <Router>
+    return <Router>
+        <React.Suspense fallback={<Loading/>}>
             <Switch>
                 {pages}
             </Switch>
-        </Router>
-    </React.Suspense>;
+        </React.Suspense>
+    </Router>;
 }
 
 const store = createStore(

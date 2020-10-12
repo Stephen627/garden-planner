@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import Garden from '../utils/database/garden';
 import { getGardens, updateGardens, setGardens } from '../actions/gardens';
 import { Auth } from '../utils/user';
-import List, { Item } from '../components/list';
 import Form from '../components/form';
+import GardenGrid from '../components/garden';
+import EntityCrud from '../components/entity-crud';
+import { __ } from '../utils/lang';
 
 export interface GardensProps {
     gardens: Garden[];
@@ -15,21 +17,21 @@ export interface GardensProps {
 }
 
 export interface GardensState {
-    selectedGarden: number
 }
 
 class Gardens extends React.Component<GardensProps, GardensState> {
 
+    private defaultGarden: Garden = {
+        name: 'New Garden',
+        width: 20,
+        height: 20
+    };
+
     constructor (props: GardensProps) {
         super(props);
 
-        this.onGardenClick = this.onGardenClick.bind(this);
-        this.onGardenEditSubmit = this.onGardenEditSubmit.bind(this);
         this.onGardenChange = this.onGardenChange.bind(this);
-
-        this.state = {
-            selectedGarden: null
-        }
+        this.onGardenListChange = this.onGardenListChange.bind(this);
     }
 
     componentDidMount () {
@@ -37,50 +39,64 @@ class Gardens extends React.Component<GardensProps, GardensState> {
         this.props.getGardens(uid);
     }
 
-    onGardenClick (gardenId: number) {
-        this.setState({
-            ...this.state,
-            selectedGarden: gardenId
-        })
-    }
-
-    onGardenEditSubmit () {
-        const uid = Auth.currentUser().uid || null;
-        this.props.updateGardens(uid, this.props.gardens);
-    }
-
-    onGardenChange (evt: React.ChangeEvent<HTMLInputElement>, changed: keyof Garden) {
+    onGardenChange (evt: React.ChangeEvent<HTMLInputElement>, id: number, changed: keyof Garden) {
         const gardens = [ ...this.props.gardens ];
-        gardens[this.state.selectedGarden][changed] = evt.target.value;
+
+        switch (changed) {
+            case 'width':
+            case 'height':
+                gardens[id][changed] = parseInt(evt.target.value);
+                break;
+            default:
+                gardens[id][changed] = evt.target.value
+                break;
+        }
 
         this.props.setGardens(gardens);
     }
 
+    onGardenListChange (gardens: Garden[]) {
+        const uid = Auth.currentUser().uid || null;
+        this.props.updateGardens(uid, gardens);
+    }
+
     render () {
-        const gardens = this.props.gardens.map((item: Garden, id: number) => {
-            return <Item onClick={() => this.onGardenClick(id)}>
-                {item.name}
-            </Item>
-        });
-
-        let form = <div></div>;
-        
-        if (this.state.selectedGarden !== null && this.state.selectedGarden >= 0) {
-            const garden: Garden = this.props.gardens[this.state.selectedGarden];
-
-            form = <Form onSubmit={this.onGardenEditSubmit}>
-                <Form.Text name="name" value={garden.name} placeholder="Garden Name" onChange={(evt) => this.onGardenChange(evt, 'name')} />
-                <Form.Submit value="Update Garden" />
-            </Form>
-        }
+        let form = (id: number, garden: Garden) => <div>
+            <Form.Group className="form__group">
+                <label>
+                    Name: 
+                    <Form.Text name="name" value={garden.name} placeholder="Garden Name" onChange={(evt) => this.onGardenChange(evt, id, 'name')} />
+                </label>
+            </Form.Group>
+            <Form.Group className="form__group">
+                <label>
+                    Width: 
+                    <Form.Text name="width" value={garden.width} placeholder="Width" onChange={(evt) => this.onGardenChange(evt, id, 'width')} />
+                </label>
+            </Form.Group>
+            <Form.Group className="form__group">
+                <label>
+                    Height: 
+                    <Form.Text name="width" value={garden.height} placeholder="Height" onChange={(evt) => this.onGardenChange(evt, id, 'height')} />
+                </label>
+            </Form.Group>
+            <div className="u-margin-top-small u-margin-bottom-small">
+                <Form.Submit className="btn btn--secondary" value={__('Update Garden')} />
+            </div>
+        </div>;
 
         return <Page>
-            <h1>Gardens</h1>
-            <p>Selected Garden: {this.state.selectedGarden}</p>
-            <List>
-                {gardens}
-            </List>
-            {this.state.selectedGarden !== null && form}
+            <EntityCrud
+                entityNameSingular="Garden"
+                entityNamePlural="Gardens"
+                entityDefaults={this.defaultGarden}
+                editModal={form}
+                viewComponent={GardenGrid}
+                onEntityChange={this.onGardenChange}
+                onEntityListChange={this.onGardenListChange}
+                entities={this.props.gardens}
+                getName={(garden: Garden) => garden.name}
+            />
         </Page>
     }
 }

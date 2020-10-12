@@ -11,9 +11,15 @@ export interface DashboardState {
 class Dashboard extends React.Component<DashboardProps, DashboardState> {
     render () {
 
+        const garden = {
+            width: 20,
+            height: 20,
+            name: 'Dashboard Garden'
+        }
+
         return <Page overflow-auto>
             <div className="dashboard">
-                <Garden/>
+                <Garden entity={garden} />
             </div>
         </Page>
     }

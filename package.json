@@ -7,7 +7,7 @@
     "build": "set NODE_ENV=development && webpack",
     "watch": "set NODE_ENV=development && webpack",
     "prod": "set NODE_ENV=production && webpack",
-    "start": "webpack-dev-server"
+    "start": "set NODE_ENV=development && webpack-dev-server"
   },
   "keywords": [
     "Garden",
