@@ -25,7 +25,7 @@ class List extends React.Component<ListProps> {
     }
 
     render () {
-        return <ul>{this.props.children}</ul>
+        return <ul className="list">{this.props.children}</ul>
     }
 }
 

@@ -6,4 +6,4 @@ export interface ItemProps {
     key: any;
 }
 
-export const Item = (props: ItemProps) => <li key={props.key} onClick={props.onClick}>{props.children}</li>;
+export const Item = (props: ItemProps) => <li className="list__item" key={props.key} onClick={props.onClick}>{props.children}</li>;
