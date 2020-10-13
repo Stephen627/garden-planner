@@ -16,6 +16,7 @@ jobs:
           node-version: '10.x'
       - run: npm install
       - run: npm run prod
+      - run: echo '{"firebase":{"api-key":"${{ secrets.FIREBASE_API_KEY }}"}}' > config.json  
       - uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
