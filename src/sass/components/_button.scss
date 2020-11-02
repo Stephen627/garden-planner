@@ -1,10 +1,28 @@
+.btn-group {
+    display: inline;
+
+    .btn {
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .btn:first-of-type {
+        border-radius: 4px 0 0 4px;
+    }
+
+    .btn:last-of-type {
+        border-radius: 0 4px 4px 0;
+    }
+}
+
 .btn {
     padding: 1rem;
-    border-radius: 2px;
+    border-radius: 4px;
     border: none;
     text-transform: uppercase;
     cursor: pointer;
     transition-duration: .5s;
+    margin: 0 .5rem;
 
     &--primary {
         background-color: $color-primary;
@@ -12,15 +30,26 @@
 
         &:hover {
             background-color: darken($color-primary, 15%);
-            color: $color-primary-text;
         }
     }
     &--secondary {
         background-color: $color-secondary;
         color: $color-secondary-text;
+
+        &:hover {
+            background-color: darken($color-secondary, 15%);
+        }
+    }
+    &--danger {
+        background-color: $color-danger;
+        color: $color-secondary-text;
+
+        &:hover {
+            background-color: darken($color-danger, 15%);
+        }
     }
     &--create {
-        position: absolute;
+        position: fixed;
         right: 5rem;
         bottom: 5rem;
         border-radius: 25rem;

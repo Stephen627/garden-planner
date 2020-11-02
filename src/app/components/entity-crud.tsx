@@ -103,14 +103,18 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
     render () {
         const items = this.props.entities.map((entity: T, id: number) => {
             return <Item key={id}>
-                {this.props.getName(entity)}
-                <a className="btn btn--primary" onClick={() => this.onEntityClick(id)}>Settings</a>
-                <a className="btn btn--primary" onClick={() => this.onEntityViewClick(id)}>View</a>
-                <a className="btn btn--danger" onClick={() => this.onDeleteClick(id)}>Delete</a>
+                <span className="list__item-title">{this.props.getName(entity)}</span>
+                <div className="list__item-actions">
+                    <div className="btn-group">
+                        <a className="btn btn--primary" onClick={() => this.onEntityClick(id)}>Settings</a>
+                        <a className="btn btn--primary" onClick={() => this.onEntityViewClick(id)}>View</a>
+                        <a className="btn btn--danger" onClick={() => this.onDeleteClick(id)}>Delete</a>
+                    </div>
+                </div>
             </Item>
         });
-        return <div>
-            <h1>{this.props.entityNamePlural}</h1>
+        return <div className="entity-crud">
+            <h1 className="heading-primary">{this.props.entityNamePlural}</h1>
             <a onClick={this.onCreateClick} className="btn btn--create btn--primary"></a>
             <List>
                 {items}

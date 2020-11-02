@@ -5,6 +5,8 @@ import { LOGIN_URL, PLANTS_URL, GARDENS_URL, ACCOUNT_URL } from '../routes';
 import { Auth } from '../utils/user';
 import { __ } from '../utils/lang';
 
+const { default: logo } = require('../../images/logo.svg');
+
 export interface HeaderProps {
 };
 export interface HeaderState {
@@ -35,10 +37,12 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
             return <Redirect to={LOGIN_URL} />
         }
 
+        console.log(logo);
+
         return <header className="header">
             <nav className="menu">
                 <div className="menu__logo">
-                    <h1 className="menu__name">{ __('Garden Planner') }</h1>
+                    <img className="menu__logo-image" src={logo} alt="Logo"/>
                 </div>
                 <ul className="menu__list menu__list--main">
                     <li className="menu__item">

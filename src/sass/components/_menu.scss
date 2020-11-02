@@ -1,11 +1,22 @@
 .menu {
     display: flex;
+    font-size: 1.8rem;
 
     &__logo {
-        background-image: linear-gradient(to bottom right, $color-primary-light, $color-primary-dark);
         text-align: center;
         color: $color-text-light;
+        transition: background-color .5s;
         padding: 1rem 1.5rem;
+        cursor: pointer;
+
+        &:hover {
+            background-color: darken($color-text-light, 10%);
+        }
+    }
+
+    &__logo-image {
+        height: 35px;
+        width: auto;
     }
 
     &__list {
@@ -20,9 +31,9 @@
     }
 
     &__item {
-        padding: 1.5rem 2rem;
+        padding: 2rem 2rem;
         cursor: pointer;
-        transition: all .5s;
+        transition: background-color .5s;
 
         &:hover {
             background-color: darken($color-text-light, 10%);

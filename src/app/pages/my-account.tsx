@@ -7,7 +7,7 @@ export interface MyAccountProps {
 
 const MyAccount = (props: MyAccountProps) => {
     return <Page>
-        <h1>Your Account</h1>
+        <h1 className="heading-primary">Your Account</h1>
     </Page>
 }
 
