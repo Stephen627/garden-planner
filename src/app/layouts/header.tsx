@@ -37,8 +37,6 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
             return <Redirect to={LOGIN_URL} />
         }
 
-        console.log(logo);
-
         return <header className="header">
             <nav className="menu">
                 <div className="menu__logo">
