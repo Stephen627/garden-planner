@@ -127,7 +127,7 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
                 </Modal>
             }
             {this.state.selectedEntity !== null &&
-                React.createElement(this.props.viewComponent, {entity: this.props.entities[this.state.selectedEntity]})
+                this.props.viewComponent(this.props.entities[this.state.selectedEntity])
             }
         </div>;
     }

@@ -8,6 +8,7 @@ const Dashboard = React.lazy(() => import(/* webpackChunkName: 'pages/dashboard'
 const MyAccount = React.lazy(() => import(/* webpackChunkName: 'pages/my-account' */ '../pages/my-account'));
 const Gardens = React.lazy(() => import(/* webpackChunkName: 'pages/gardens' */ '../pages/gardens'));
 const Garden = React.lazy(() => import(/* webpackChunkName: 'pages/garden' */ '../pages/garden'));
+const Plants = React.lazy(() => import(/* webpackChunkName: 'pages/plants' */ '../pages/plants'));
 
 export const REGISTER_URL = '/register';
 export const LOGIN_URL = '/login';
@@ -24,5 +25,6 @@ export const pages: any[] = [
     <PrivateRoute key="gardens" path={GARDENS_URL} component={Gardens}></PrivateRoute>,
     <PrivateRoute key="garden" path={GARDEN_URL} component={Garden}></PrivateRoute>,
     <PrivateRoute key="home" path={HOME_URL} component={Dashboard}></PrivateRoute>,
+    <PrivateRoute key="plants" path={PLANTS_URL} component={Plants}></PrivateRoute>,
     <Redirect key="home-redirect" to={HOME_URL} />, // If no routes are matched then redirect the user to the home page
 ];

@@ -91,7 +91,7 @@ class Gardens extends React.Component<GardensProps, GardensState> {
                 entityNamePlural="Gardens"
                 entityDefaults={this.defaultGarden}
                 editModal={form}
-                viewComponent={GardenGrid}
+                viewComponent={(garden: Garden) => <GardenGrid entity={garden}/>}
                 onEntityChange={this.onGardenChange}
                 onEntityListChange={this.onGardenListChange}
                 entities={this.props.gardens}
