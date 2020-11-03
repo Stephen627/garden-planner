@@ -60,6 +60,27 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                         <Link to={ACCOUNT_URL}>My Account</Link>
                     </li>
                 </ul>
+                <div className="mobile-menu">
+                    <input className="mobile-menu__checkbox" type="checkbox" id="mobile-menu-toggle" />
+                    <label className="mobile-menu__button" htmlFor="mobile-menu-toggle">
+                        <span className="mobile-menu__icon"></span>
+                    </label>
+                    <div className="mobile-menu__background"></div>
+                    <ul className="mobile-menu__list">
+                        <li className="mobile-menu__list-item">
+                            <Link to={GARDENS_URL}>Gardens</Link>
+                        </li>
+                        <li className="mobile-menu__list-item">
+                            <Link to={PLANTS_URL}>Plants</Link>
+                        </li>
+                        <li className="mobile-menu__list-item">
+                            <Link to={ACCOUNT_URL}>My Account</Link>
+                        </li>
+                        <li className="mobile-menu__list-item" onClick={this.onSignOutClick}>
+                            <a href="#">Sign Out</a>
+                        </li>
+                    </ul>
+                </div>
             </nav>
         </header>
     }
