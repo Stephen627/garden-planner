@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 
-import { LOGIN_URL, PLANTS_URL, GARDENS_URL, ACCOUNT_URL } from '../routes';
+import { LOGIN_URL, PLANTS_URL, GARDENS_URL, ACCOUNT_URL, HOME_URL } from '../routes';
 import { Auth } from '../utils/user';
 import { __ } from '../utils/lang';
 
@@ -40,7 +40,9 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
         return <header className="header">
             <nav className="menu">
                 <div className="menu__logo">
-                    <img className="menu__logo-image" src={logo} alt="Logo"/>
+                    <Link to={HOME_URL}>
+                        <img className="menu__logo-image" src={logo} alt="Logo"/>
+                    </Link>
                 </div>
                 <ul className="menu__list menu__list--main">
                     <li className="menu__item">

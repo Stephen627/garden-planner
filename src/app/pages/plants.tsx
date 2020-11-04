@@ -36,7 +36,7 @@ class Plants extends React.Component<PlantsProps, PlantsState> {
                 entityNamePlural="Plants"
                 entityDefaults={{}}
                 editModal={<div></div>}
-                viewComponent={(plant: any) => viewComponent}
+                viewComponent={(id: any, plant: any) => viewComponent}
                 onEntityChange={this.onPlantChange}
                 onEntityListChange={this.onPlantListChange}
                 entities={[]}

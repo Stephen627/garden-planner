@@ -1,16 +1,12 @@
 .garden {
     display: flex;
     flex-direction: row;
-
-    .settings {
-        flex-basis: 20%;
-        height: 94.8vh;
-    }
+    width: 90vw;
+    margin: 0 auto;
 
     .garden-grid {
         flex-grow: 1;
-        max-width: 80%;
-        max-height: 94.8vh;
+        max-height: 85.6vh;
     }
 }
 

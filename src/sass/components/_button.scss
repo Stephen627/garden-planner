@@ -48,7 +48,7 @@
             background-color: darken($color-danger, 15%);
         }
     }
-    &--create {
+    &--float {
         position: fixed;
         right: 5rem;
         bottom: 5rem;
@@ -59,8 +59,10 @@
         height: 65px;
         text-align: center;
 
-        &:after {
-            content: '+';
+        & > * {
+            width: 100% !important; // FA overrides this
+            height: 100%;
+            padding: 1rem;
         }
     }
 }

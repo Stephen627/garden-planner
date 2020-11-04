@@ -5,7 +5,7 @@
     margin-bottom: 2rem;
 
     &--danger {
-        background-color: #e74c3c;
+        background-color: $color-danger;
         color: $color-text-light;
     }
 }

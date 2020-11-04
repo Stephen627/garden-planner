@@ -5,9 +5,10 @@ import Garden from '../utils/database/garden';
 import { getGardens, updateGardens, setGardens } from '../actions/gardens';
 import { Auth } from '../utils/user';
 import Form from '../components/form';
-import GardenGrid from '../components/garden';
 import EntityCrud from '../components/entity-crud';
 import { __ } from '../utils/lang';
+import {  Redirect } from 'react-router-dom';
+import { GARDEN_URL } from '../routes';
 
 export interface GardensProps {
     gardens: Garden[];
@@ -91,7 +92,7 @@ class Gardens extends React.Component<GardensProps, GardensState> {
                 entityNamePlural="Gardens"
                 entityDefaults={this.defaultGarden}
                 editModal={form}
-                viewComponent={(garden: Garden) => <GardenGrid entity={garden}/>}
+                viewComponent={(id: any, garden: Garden) => <Redirect to={GARDEN_URL.replace(/:id/, id + 1)}></Redirect>}
                 onEntityChange={this.onGardenChange}
                 onEntityListChange={this.onGardenListChange}
                 entities={this.props.gardens}

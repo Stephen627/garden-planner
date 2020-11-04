@@ -28,7 +28,6 @@ export interface EntityCrudProps<T> {
 }
 
 export interface EntityCrudState {
-    editEntity: number;
     selectedEntity: number;
 }
 
@@ -40,36 +39,10 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
         this.onCreateClick = this.onCreateClick.bind(this);
         this.onDeleteClick = this.onDeleteClick.bind(this);
         this.onEntityViewClick = this.onEntityViewClick.bind(this);
-        this.onModalCloseClick = this.onModalCloseClick.bind(this);
-        this.onEntityClick = this.onEntityClick.bind(this);
-        this.onEntityEditClick = this.onEntityEditClick.bind(this);
-        this.onEditSubmit = this.onEditSubmit.bind(this);
 
         this.state = {
             selectedEntity: null,
-            editEntity: null
         };
-    }
-
-    onEntityClick (id: number) {
-        this.setState({
-            ...this.state,
-            editEntity: id
-        });
-    }
-
-    onEntityEditClick (id: number) {
-        this.setState({
-            ...this.state,
-            editEntity: id
-        });
-    }
-
-    onModalCloseClick () {
-        this.setState({
-            ...this.state,
-            editEntity: null
-        });
     }
 
     onEntityViewClick (id: number) {
@@ -83,7 +56,7 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
         const entities = [ ...this.props.entities ];
         delete entities[id];
 
-        this.props.onEntityListChange(entities);
+        this.props.onEntityListChange(entities.filter((entity) => entity));
     }
 
     onCreateClick () {
@@ -95,18 +68,12 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
         this.props.onEntityListChange(entities);
     }
 
-    onEditSubmit () {
-        this.onModalCloseClick();
-        this.props.onEntityListChange(this.props.entities);
-    }
-
     render () {
         const items = this.props.entities.map((entity: T, id: number) => {
             return <Item key={id}>
                 <span className="list__item-title">{this.props.getName(entity)}</span>
                 <div className="list__item-actions">
                     <div className="btn-group">
-                        <a className="btn btn--primary" onClick={() => this.onEntityClick(id)}>Settings</a>
                         <a className="btn btn--primary" onClick={() => this.onEntityViewClick(id)}>View</a>
                         <a className="btn btn--danger" onClick={() => this.onDeleteClick(id)}>Delete</a>
                     </div>
@@ -115,19 +82,14 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
         });
         return <div className="entity-crud">
             <h1 className="heading-primary">{this.props.entityNamePlural}</h1>
-            <a onClick={this.onCreateClick} className="btn btn--create btn--primary"></a>
+            <a onClick={this.onCreateClick} className="btn btn--float btn--create btn--primary">
+                <i className="fal fa-plus"></i>
+            </a>
             <List>
                 {items}
             </List>
-            {this.state.editEntity !== null &&
-                <Modal onClose={this.onModalCloseClick} title={'Edit ' + this.props.entityNameSingular}>
-                    <Form onSubmit={this.onEditSubmit} className="form">
-                        {this.props.editModal(this.state.editEntity, this.props.entities[this.state.editEntity])}
-                    </Form>
-                </Modal>
-            }
             {this.state.selectedEntity !== null &&
-                this.props.viewComponent(this.props.entities[this.state.selectedEntity])
+                this.props.viewComponent(this.state.selectedEntity, this.props.entities[this.state.selectedEntity])
             }
         </div>;
     }
