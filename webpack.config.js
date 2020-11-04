@@ -3,7 +3,8 @@ const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 const mode = typeof process.env.NODE_ENV === 'undefined'
   ? 'production'
@@ -110,6 +111,7 @@ module.exports = {
                 'pages/dashboard',
             ]
         }),
+        new FaviconsWebpackPlugin('./src/images/favicon.png'),
         new webpack.HashedModuleIdsPlugin(),
         new MiniCssExtractPlugin({
           filename: '[name].css',
