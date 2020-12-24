@@ -22,5 +22,5 @@ export default (state : GeneralState = initialState, payload: Payload = { type: 
             return {
                 ...state
             };
-    };
+    }
 }
