@@ -5,16 +5,16 @@ export interface GardenGridProps {
     width: number;
     height: number;
     defaultCellContents?: CellContent[][];
-};
+}
 
 export interface CellContent {
     background: string;
     plant: string;
-};
+}
 
 export interface GardenGridState {
     cellContents: CellContent[][];
-};
+}
 
 export class GardenGrid extends React.Component<GardenGridProps, GardenGridState> {
 

@@ -7,7 +7,7 @@ import { Auth } from '../utils/user';
 export interface PrivateRouteProps {
     component: React.ReactNode;
     path: string;
-};
+}
 
 export const PrivateRoute = (props: any) => {
     const { component, ...rest } = props;

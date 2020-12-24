@@ -6,7 +6,7 @@ export interface ListProps {
     paginate?: boolean;
     topPaginate?: boolean;
     bottomPaginate?: boolean;
-};
+}
 
 class List extends React.Component<ListProps> {
     constructor (props: ListProps) {

@@ -1,4 +1,4 @@
-import FirebaseAuthenticator from "./authenticator/firebase/authenticator";
+import FirebaseAuthenticator from "./authenticator/firebase/FirebaseAuthenticator";
 import Authenticator from "./authenticator";
 
 const firebaseAuth = new FirebaseAuthenticator();

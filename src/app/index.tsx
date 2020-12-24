@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import * as ReactDOM from 'react-dom';;
+import * as ReactDOM from 'react-dom';
 import { 
     BrowserRouter as Router,
     Switch

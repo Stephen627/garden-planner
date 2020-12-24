@@ -11,7 +11,7 @@ export interface PaginateProps {
     perPage: number;
     active: number;
     onClick: Function;
-};
+}
 
 export const PaginateButton = (props: PaginateButtonProps) =>
     <button className="paginate__button" onClick={() => props.onClick(props.page)}>

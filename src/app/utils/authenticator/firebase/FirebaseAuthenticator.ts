@@ -3,8 +3,8 @@ import 'firebase/auth';
 
 import '../../firebase';
 import AuthenticatorInterface from '../authenticator-interface';
-import FirebaseUser from './user';
-import FirebaseUserCredentials from './user-credentials';
+import FirebaseUser from './FirebaseUser';
+import FirebaseUserCredentials from './FirebaseUserCredentials';
 
 
 class FirebaseAuthenticator implements AuthenticatorInterface {

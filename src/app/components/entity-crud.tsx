@@ -1,7 +1,5 @@
 import * as React from 'react';
-import Form from './form';
 import List, { Item } from './list';
-import Modal from './modal';
 
 interface entityListChange<T> {
     (entityList: T[]): void;
@@ -54,7 +52,7 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
 
     onDeleteClick (id: number) {
         const entities = [ ...this.props.entities ];
-        delete entities[id];
+        entities.splice(id, 1);
 
         this.props.onEntityListChange(entities.filter((entity) => entity));
     }

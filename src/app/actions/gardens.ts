@@ -1,4 +1,4 @@
-import { SET_LOADING, setLoading } from "./general"
+import { setLoading } from "./general"
 import Garden from "../utils/database/garden";
 import { db } from "../utils/db";
 import { Payload } from "./types";

@@ -9,7 +9,7 @@ import { Page } from '../layouts/not-logged-in';
 import Form from '../components/form';
 
 export interface LoginProps {
-};
+}
 export interface LoginState {
     toDashboard: boolean,
     error: string,

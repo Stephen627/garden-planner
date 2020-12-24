@@ -8,7 +8,7 @@ import { __ } from '../utils/lang';
 const { default: logo } = require('../../images/logo.svg');
 
 export interface HeaderProps {
-};
+}
 export interface HeaderState {
     toLogin: boolean,
 }
@@ -46,10 +46,10 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                 </div>
                 <ul className="menu__list menu__list--main">
                     <li className="menu__item">
-                        <Link to={GARDENS_URL}>Gardens</Link>
+                        <Link to={GARDENS_URL}>{ __('Gardens') }</Link>
                     </li>
                     <li className="menu__item">
-                        <Link to={PLANTS_URL}>Plants</Link>
+                        <Link to={PLANTS_URL}>{ __('Plants') }</Link>
                     </li> 
                 </ul>
                 <ul className="menu__list menu__list--right">
@@ -57,7 +57,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                         Sign Out
                     </li>
                     <li className="menu__item">
-                        <Link to={ACCOUNT_URL}>My Account</Link>
+                        <Link to={ACCOUNT_URL}>{ __('My Account') }</Link>
                     </li>
                 </ul>
                 <div className="mobile-menu">
@@ -68,16 +68,16 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                     <div className="mobile-menu__background"></div>
                     <ul className="mobile-menu__list">
                         <li className="mobile-menu__list-item">
-                            <Link to={GARDENS_URL}>Gardens</Link>
+                            <Link to={GARDENS_URL}>{ __('Gardens') }</Link>
                         </li>
                         <li className="mobile-menu__list-item">
-                            <Link to={PLANTS_URL}>Plants</Link>
+                            <Link to={PLANTS_URL}>{ __('Plants') }</Link>
                         </li>
                         <li className="mobile-menu__list-item">
-                            <Link to={ACCOUNT_URL}>My Account</Link>
+                            <Link to={ACCOUNT_URL}>{ __('My Account') }</Link>
                         </li>
                         <li className="mobile-menu__list-item" onClick={this.onSignOutClick}>
-                            <a href="#">Sign Out</a>
+                            <a href="#">{ __('Sign Out') }</a>
                         </li>
                     </ul>
                 </div>

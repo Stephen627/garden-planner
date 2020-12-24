@@ -4,9 +4,9 @@ import { Payload } from '../actions/types';
 const initialState: GeneralState = {
     loading: false,
     error: null
-};
+}
 
-export default (state : GeneralState = initialState, payload: Payload): GeneralState => {
+export default (state : GeneralState = initialState, payload: Payload = { type: '', data: {} }): GeneralState => {
     switch (payload.type) {
         case SET_ERROR:
             return {
