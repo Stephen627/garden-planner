@@ -44,7 +44,6 @@ bower_components
 build/Release
 public
 config.json
-test-report.xml
 
 # Dependency directories
 node_modules/
