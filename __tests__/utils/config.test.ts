@@ -1,4 +1,4 @@
-const { default: config, Config } = require('../../app/utils/config');
+import config, { Config } from '../../src/app/utils/config';
 
 describe('Config object', () => {
     beforeEach(() => {

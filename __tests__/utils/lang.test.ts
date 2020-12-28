@@ -1,4 +1,4 @@
-import { __ } from '../../app/utils/lang';
+import { __ } from '../../src/app/utils/lang';
 
 describe('Lang function', () => {
     test('Searching for a word not the lang file will return the value provided', () => {
