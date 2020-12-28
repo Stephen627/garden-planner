@@ -10,9 +10,6 @@
     "start": "set NODE_ENV=development && webpack-dev-server",
     "test": "jest --coverage"
   },
-  "jest": {
-    "testResultsProcessor": "jest-sonar-reporter"
-  },
   "keywords": [
     "Garden",
     "Planner"

@@ -6,12 +6,37 @@ on:
       types: [opened, synchronize, reopened]
 name: Code Quality
 jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Setup Node
+        uses: actions/setup-node@master
+        with:
+          node-version: '10.x'
+      - name: Create config file
+        run: echo '{"firebase":{"api-key":"${{ secrets.FIREBASE_API_KEY }}"}}' > config.json
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run test
+      - name: Archive test Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: coverage
+          path: coverage
   sonarcloud:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+    - name: Checkout Repo
+        uses: actions/checkout@master
+    - name: Download test Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: coverage
+          path: coverage
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
