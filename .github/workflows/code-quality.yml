@@ -15,12 +15,12 @@ jobs:
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
-        projectBaseDir: './src'
+        projectBaseDir: 'src'
         args: >
           -Dsonar.organization=stephen627
           -Dsonar.projectKey=Stephen627_garden-planner
           -Dsonar.javascript.lcov.reportPaths=test-report.xml
-          -Dsonar.tests=./src/__tests__/
+          -Dsonar.tests=src/__tests__/
           -Dsonar.verbose=true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
