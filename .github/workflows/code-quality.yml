@@ -6,8 +6,8 @@ on:
       types: [opened, synchronize, reopened]
 name: Code Quality
 jobs:
-  build:
-    name: Build
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
@@ -20,7 +20,7 @@ jobs:
         run: echo '{"firebase":{"api-key":"${{ secrets.FIREBASE_API_KEY }}"}}' > config.json
       - name: Install Dependencies
         run: npm install
-      - name: Build
+      - name: Run tests
         run: npm run test
       - name: Archive test Artifact
         uses: actions/upload-artifact@master
@@ -29,6 +29,7 @@ jobs:
           path: coverage
   sonarcloud:
     runs-on: ubuntu-latest
+    needs: test
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
