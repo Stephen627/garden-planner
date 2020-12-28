@@ -19,8 +19,9 @@ jobs:
         args: >
           -Dsonar.organization=stephen627
           -Dsonar.projectKey=Stephen627_garden-planner
-          -Dsonar.python.coverage.reportPaths=coverage.xml
-          -Dsonar.verbose=true:  
+          -Dsonar.javascript.lcov.reportPaths=test-report.xml
+          -Dsonar.tests=./src/__tests__/
+          -Dsonar.verbose=true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
