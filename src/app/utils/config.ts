@@ -9,6 +9,33 @@ class Config {
         this.data = config;
     }
 
+    public set (key: string, value: any): void {
+        if (key.indexOf('.') === -1) {
+            this.data[key] = value;
+            return;
+        }
+
+        const parts = key.split('.');
+        let data = this.data;
+        parts.forEach((part: string, index: number) => {
+            if (typeof data[part] === 'undefined') {
+                if (index === parts.length - 1) {
+                    data[part] = value;
+                } else {
+                    data[part] = {};
+                }
+            } else {
+                if (index === parts.length - 1) {
+                    data[part] = value;
+                } else if (typeof data[part] !== 'object') {
+                    data[part] = {};
+                }
+            }
+
+            data = data[part];
+        });
+    }
+
     public get (key: string): any {
         if (key.indexOf('.') === -1) {
             return this.data[key];
@@ -23,6 +50,10 @@ class Config {
         return value;
     }
 
+    public wipe (): void {
+        this.data = {};
+    }
+
     static getInstance (): Config {
         if (!Config.instance) {
             Config.instance = new Config();
@@ -32,4 +63,7 @@ class Config {
     }
 }
 
+export {
+    Config
+}
 export default Config.getInstance();

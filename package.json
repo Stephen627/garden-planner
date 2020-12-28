@@ -8,10 +8,7 @@
     "watch": "set NODE_ENV=development && webpack",
     "prod": "set NODE_ENV=production && webpack",
     "start": "set NODE_ENV=development && webpack-dev-server",
-    "test": "jest"
-  },
-  "jest": {
-    "testMatch": "src/tests/**/*.test.ts"
+    "test": "jest --coverage"
   },
   "keywords": [
     "Garden",
@@ -20,6 +17,8 @@
   "author": "Stephen James <me@stephenjames.dev>",
   "license": "MIT",
   "devDependencies": {
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-typescript": "^7.12.7",
     "@types/jest": "^26.0.19",
     "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.8",
