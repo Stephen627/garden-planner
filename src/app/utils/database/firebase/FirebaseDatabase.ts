@@ -21,6 +21,10 @@ class FirebaseDatabase implements DatabaseInterface {
         return database.ref(ref).set(data);
     }
 
+    public remove (ref: string): Promise<any> {
+        return database.ref(ref).remove();
+    }
+
 }
 
 export default FirebaseDatabase;

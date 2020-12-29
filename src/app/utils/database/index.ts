@@ -15,6 +15,10 @@ class Database {
     public set (ref: string, data: any): Promise<any> {
         return this.adapter.set(ref, data);
     }
+
+    public remove (ref: string): Promise<any> {
+        return this.adapter.remove(ref);
+    }
 }
 
 export default Database;
