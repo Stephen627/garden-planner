@@ -1,3 +1,4 @@
 export default interface User {
-    uid: string;
+    readonly uid: string;
+    delete: () => Promise<void>;
 }
