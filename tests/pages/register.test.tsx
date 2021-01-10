@@ -69,7 +69,7 @@ describe('Register Page', () => {
 
         fireEvent.submit(form);
 
-        await new Promise((resolve) => setTimeout(() => resolve(true), 1000));
+        await new Promise((resolve) => setTimeout(() => resolve(true), 3000));
 
         expect(Auth.currentUser()).toBeTruthy();
         Auth.currentUser().delete();
