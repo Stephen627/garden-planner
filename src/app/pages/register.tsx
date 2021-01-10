@@ -95,23 +95,23 @@ class Register extends React.Component<RegisterProps, RegisterState> {
             : '';
 
         return <Page>
-            <Form className="center-form" onSubmit={this.onFormSubmit}>
+            <Form testId="form" className="center-form" onSubmit={this.onFormSubmit}>
                 <div className="center-form__inner">
                     <div className="u-text-center u-margin-bottom-small">
                         <h2 className="heading-secondary">{ __('Register') }</h2>
                     </div>
                     { error }
                     <Form.Group className="center-form__group">
-                        <Form.Email placeholder={__('Email')} name="email" value={this.state.email} onChange={this.onEmailChange} />
+                        <Form.Email testId="email" placeholder={__('Email')} name="email" value={this.state.email} onChange={this.onEmailChange} />
                     </Form.Group>
                     <Form.Group className="center-form__group">
-                        <Form.Password placeholder={__('Password')} name="password" value={this.state.password} onChange={this.onPasswordChange} />
+                        <Form.Password testId="password" placeholder={__('Password')} name="password" value={this.state.password} onChange={this.onPasswordChange} />
                     </Form.Group>
                     <Form.Group className="center-form__group">
-                        <Form.Password placeholder={__('Confirm Password')} name="password" value={this.state.confirmPassword} onChange={this.onConfirmPasswordChange} />
+                        <Form.Password testId="confirm-password" placeholder={__('Confirm Password')} name="confirm-password" value={this.state.confirmPassword} onChange={this.onConfirmPasswordChange} />
                     </Form.Group>
                     <div className="u-margin-top-small u-margin-bottom-small">
-                        <Form.Submit className="btn btn--secondary" value={__('Register')} />
+                        <Form.Submit testId="submit" className="btn btn--secondary" value={__('Register')} />
                     </div>
                     <div className="u-text-center">
                         <Link to={LOGIN_URL}>&larr; { __('Back to Login') }</Link>

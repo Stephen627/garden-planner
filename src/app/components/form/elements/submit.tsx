@@ -1,12 +1,13 @@
 import * as React from 'react';
 
 export interface SubmitProps {
-    value?: string,
-    className?: string
+    value?: string;
+    className?: string;
+    testId?: any;
 }
 
 const Submit = (props: SubmitProps) => {
-    return <input type="submit" value={props.value || 'Submit'} className={props.className}></input>
+    return <input data-testid={props.testId} type="submit" value={props.value || 'Submit'} className={props.className}></input>
 }
 
 export default Submit;

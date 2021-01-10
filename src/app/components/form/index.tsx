@@ -18,11 +18,12 @@ export interface FormProps {
     method?: FormMethod,
     onSubmit: Function,
     className?: string,
-    children?: any
+    children?: any,
+    testId?: any
 }
 
 const Form = (props: FormProps) => {
-    return <form className={props.className || 'form'} action={props.action} method={props.method} onSubmit={(evt) => { evt.preventDefault(); props.onSubmit(evt) }}>
+    return <form data-testid={props.testId} className={props.className || 'form'} action={props.action} method={props.method} onSubmit={(evt) => { evt.preventDefault(); props.onSubmit(evt) }}>
         {props.children}
     </form>;
 }

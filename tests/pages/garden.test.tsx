@@ -1,23 +1,14 @@
 import * as React from 'react';
-import { act } from 'react-dom/test-utils';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import { 
-    BrowserRouter as Router,
-    Switch
-} from 'react-router-dom';
 import { render, cleanup, waitFor } from '@testing-library/react';
 
 import Garden, { GardenProps } from '../../src/app/pages/garden';
 import { db } from '../../src/app/utils/db';
-import reducers from '../../src/app/reducers';
 import { Auth } from '../../src/app/utils/user';
+import MockApp from '../mock-app';
 
 describe('View Garden Page', () => {
     let container: HTMLElement = null;
     let fakeUserId: string = null;
-    const mockStore = createStore(reducers, applyMiddleware(thunk));
     const fakeGardens = [
         {
             height: 20,
@@ -64,7 +55,7 @@ describe('View Garden Page', () => {
     test('The garden name should appear on the page', async () => {
         await Auth.authenticate('test-garden@stephenjames.dev', 'test123');
 
-        const { getByTestId } = render(<Provider store={mockStore}><Router><Garden { ...generateProps('1') } /></Router></Provider>);
+        const { getByTestId } = render(<MockApp><Garden { ...generateProps('1') } /></MockApp>);
         const pageNode = await waitFor(() => getByTestId('page'));
         expect(pageNode.textContent).toMatch(/Test Garden 1/);
     });

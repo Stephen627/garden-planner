@@ -18,7 +18,7 @@ class Dashboard extends React.Component<DashboardProps, DashboardState> {
         }
 
         return <Page overflow-auto>
-            <div className="dashboard">
+            <div data-testid="dashboard" className="dashboard">
                 <Garden entity={garden} />
             </div>
         </Page>
