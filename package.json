@@ -36,7 +36,7 @@
     "@types/redux": "^3.6.0",
     "@types/redux-mock-store": "^1.0.2",
     "@types/redux-thunk": "^2.1.0",
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^10.2.1",
     "babel-jest": "^26.6.3",
     "css-loader": "^3.6.0",
     "favicons-webpack-plugin": "^4.2.0",
@@ -48,10 +48,10 @@
     "jest-svg-transformer": "^1.0.0",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
-    "postcss": "^7.0.35",
+    "postcss": "^8.2.4",
     "postcss-cli": "^7.1.2",
     "postcss-focus-within": "^4.0.0",
-    "postcss-loader": "^3.0.0",
+    "postcss-loader": "^4.0.0",
     "react-test-renderer": "^17.0.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-mock-store": "^1.5.4",
@@ -72,6 +72,7 @@
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "tailwindcss": "^2.0.2"
   }
 }
