@@ -91,8 +91,8 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-6">
-                        <nav className="grid gap-y-8">
+                    <div className="my-6">
+                        <nav className="grid gap-y-2">
                             <Link className="p-3 flex items-center rounded-md hover:bg-gray-50" to={GARDENS_URL}>
                                 <span className="ml-3 text-base font-medium text-gray-900">
                                     { __('Gardens') }
