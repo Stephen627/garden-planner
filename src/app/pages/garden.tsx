@@ -10,6 +10,7 @@ import GardenGrid from '../components/garden';
 import Form from '../components/form';
 import { __ } from '../utils/lang';
 import Modal from '../components/modal';
+import Action from '../components/action';
 
 export interface GardenProps {
     match: { params: { id: string } };
@@ -106,9 +107,9 @@ class Garden extends React.Component<GardenProps, GardenState> {
         return <Page title={garden.name}>
             <GardenGrid entity={garden}></GardenGrid>
             {this.state.showSettings && form}
-            <a onClick={() => this.setState({ ...this.state, showSettings: true })} className="fixed cursor-pointer bottom-10 leading-16 text-4xl shadow-sm text-center right-10 w-16 h-16 text-white rounded-full bg-green-600 hover:bg-green-700">
+            <Action onClick={() => this.setState({ ...this.state, showSettings: true })}>
                 <i className="fal fa-cog"></i>
-            </a>
+            </Action>
         </Page>
     }
 }
