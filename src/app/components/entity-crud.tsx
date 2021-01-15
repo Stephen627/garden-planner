@@ -79,8 +79,7 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
             </Item>
         });
         return <div className="entity-crud">
-            <h1 className="heading-primary">{this.props.entityNamePlural}</h1>
-            <a onClick={this.onCreateClick} className="btn btn--float btn--create btn--primary">
+            <a onClick={this.onCreateClick} className="absolute cursor-pointer bottom-10 leading-16 text-4xl shadow-sm text-center right-10 w-16 h-16 text-white rounded-full bg-green-600 hover:bg-green-700">
                 <i className="fal fa-plus"></i>
             </a>
             <List>
