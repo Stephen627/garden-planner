@@ -68,21 +68,21 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
 
     render () {
         const items = this.props.entities.map((entity: T, id: number) => {
-            return <Item key={id}>
-                <span className="list__item-title">{this.props.getName(entity)}</span>
-                <div className="list__item-actions">
-                    <div className="btn-group">
-                        <a className="btn btn--primary" onClick={() => this.onEntityViewClick(id)}>View</a>
-                        <a className="btn btn--danger" onClick={() => this.onDeleteClick(id)}>Delete</a>
+            return <Item key={id} className="p-4 w-full md:w-4/12 lg:w-3/12">
+                <div className="shadow-md border-2 border-gray-200 rounded-lg">
+                    <h4 className="px-6 py-4 text-lg font-semibold">{this.props.getName(entity)}</h4>
+                    <div className="flex justify-between border-t-2 border-gray-200 w-full">
+                        <div className="w-6/12 text-center p-2 border-r-2 border-gray-200"><a href="#" onClick={() => this.onEntityViewClick(id)}><i className="fa fa-eye"></i> View</a></div>
+                        <div className="w-6/12 text-center p-2"><a href="#" onClick={() => this.onDeleteClick(id)}><i className="fa fa-trash"></i> Delete</a></div>
                     </div>
                 </div>
             </Item>
         });
-        return <div className="entity-crud">
+        return <div className="w-10/12 md:w-11/12 mt-7 mx-auto h-full">
             <a onClick={this.onCreateClick} className="absolute cursor-pointer bottom-10 leading-16 text-4xl shadow-sm text-center right-10 w-16 h-16 text-white rounded-full bg-green-600 hover:bg-green-700">
                 <i className="fal fa-plus"></i>
             </a>
-            <List>
+            <List className="flex justify-start flex-wrap">
                 {items}
             </List>
             {this.state.selectedEntity !== null &&
