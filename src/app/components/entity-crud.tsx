@@ -79,7 +79,7 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
             </Item>
         });
         return <div className="w-10/12 md:w-11/12 mt-7 mx-auto h-full">
-            <a onClick={this.onCreateClick} className="absolute cursor-pointer bottom-10 leading-16 text-4xl shadow-sm text-center right-10 w-16 h-16 text-white rounded-full bg-green-600 hover:bg-green-700">
+            <a onClick={this.onCreateClick} className="fixed cursor-pointer bottom-10 leading-16 text-4xl shadow-sm text-center right-10 w-16 h-16 text-white rounded-full bg-green-600 hover:bg-green-700">
                 <i className="fal fa-plus"></i>
             </a>
             <List className="flex justify-start flex-wrap">

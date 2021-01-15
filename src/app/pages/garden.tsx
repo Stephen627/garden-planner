@@ -103,11 +103,10 @@ class Garden extends React.Component<GardenProps, GardenState> {
             </Form>
         </Modal>;
 
-        return <Page>
-            <h1 className="heading-primary">{garden.name}</h1>
+        return <Page title={garden.name}>
             <GardenGrid entity={garden}></GardenGrid>
             {this.state.showSettings && form}
-            <a onClick={() => this.setState({ ...this.state, showSettings: true })} className="btn btn--primary btn--float btn--settings">
+            <a onClick={() => this.setState({ ...this.state, showSettings: true })} className="fixed cursor-pointer bottom-10 leading-16 text-4xl shadow-sm text-center right-10 w-16 h-16 text-white rounded-full bg-green-600 hover:bg-green-700">
                 <i className="fal fa-cog"></i>
             </a>
         </Page>
