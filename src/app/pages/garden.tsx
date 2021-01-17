@@ -5,7 +5,7 @@ import { Page } from '../layouts/logged-in';
 import GardenModel from '../utils/database/garden';
 import { getGardens, updateGardens, setGardens } from '../actions/gardens';
 import { Auth } from '../utils/user';
-import Loading from './loading';
+import Loading from '../components/loading';
 import GardenGrid from '../components/garden';
 import Form from '../components/form';
 import { __ } from '../utils/lang';
