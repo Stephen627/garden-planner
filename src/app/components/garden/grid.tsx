@@ -36,12 +36,12 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
             for (let j = 0; j < width; j++) {
                 const content: CellContent = typeof cellContents[i] === 'undefined' || typeof cellContents[i][j] === 'undefined' ? {
                     background: null,
-                    plant: null
+                    plant: null,
                 } : cellContents[i][j];
-                cells[j] = <Cell key={`${i}x${j}`} {...content}></Cell>;
+                cells[j] = <Cell key={`${i}x${j}`} {...content} bottom={i === height - 1} right={j === width - 1}></Cell>;
             }
-            rows.push(<div key={i} className="garden-grid__row">{cells}</div>);
+            rows.push(<div key={i} className="flex flex-row">{cells}</div>);
         }
-        return <div className="garden-grid"><div className="garden-grid__inner">{rows}</div></div>
+        return <div className="overflow-auto mx-8"><div className="py-4 w-max">{rows}</div></div>
     }
 }
