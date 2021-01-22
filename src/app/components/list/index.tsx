@@ -6,6 +6,7 @@ export interface ListProps {
     paginate?: boolean;
     topPaginate?: boolean;
     bottomPaginate?: boolean;
+    className?: string;
 }
 
 class List extends React.Component<ListProps> {
@@ -28,7 +29,7 @@ class List extends React.Component<ListProps> {
         if (!this.props.children.length) {
             return <div className="list--empty">There are no items in the list</div>
         }
-        return <ul className="list">{this.props.children}</ul>
+        return <ul className={this.props.className}>{this.props.children}</ul>
     }
 }
 

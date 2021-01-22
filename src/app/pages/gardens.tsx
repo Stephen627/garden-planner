@@ -86,7 +86,7 @@ class Gardens extends React.Component<GardensProps, GardensState> {
             </div>
         </div>;
 
-        return <Page>
+        return <Page title="Gardens">
             <EntityCrud
                 entityNameSingular="Garden"
                 entityNamePlural="Gardens"

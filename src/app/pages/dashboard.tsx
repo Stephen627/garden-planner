@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Page } from '../layouts/logged-in';
-import Garden from '../components/garden';
+import Loading from '../components/loading';
 
 export interface DashboardProps {
 }
@@ -19,7 +19,7 @@ class Dashboard extends React.Component<DashboardProps, DashboardState> {
 
         return <Page overflow-auto>
             <div data-testid="dashboard" className="dashboard">
-                <Garden entity={garden} />
+                <Loading></Loading>
             </div>
         </Page>
     }

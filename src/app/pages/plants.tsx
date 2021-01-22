@@ -30,7 +30,7 @@ class Plants extends React.Component<PlantsProps, PlantsState> {
     }
 
     render () {
-        return <Page>
+        return <Page title="Plants">
             <EntityCrud
                 entityNameSingular="Plant"
                 entityNamePlural="Plants"

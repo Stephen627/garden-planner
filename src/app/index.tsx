@@ -11,7 +11,7 @@ import { Provider  } from 'react-redux';
 import { createStore, applyMiddleware  } from 'redux';
 import reducers from './reducers';
 import { pages } from './routes';
-import Loading from './pages/loading';
+import Loading from './components/loading';
 import { Auth } from './utils/user';
 
 import './utils/firebase';

@@ -16,7 +16,7 @@ export enum FormMethod {
 export interface FormProps {
     action?: string,
     method?: FormMethod,
-    onSubmit: Function,
+    onSubmit?: Function,
     className?: string,
     children?: any,
     testId?: any
