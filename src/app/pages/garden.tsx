@@ -78,28 +78,27 @@ class Garden extends React.Component<GardenProps, GardenState> {
 
         const garden: GardenModel = this.props.gardens[this.id];
 
-        let form = <Modal title="Settings" onClose={() => this.setState({ ...this.state, showSettings: false })}>
-            <Form onSubmit={this.onSettingsSubmit} className="form">
-                <Form.Group className="form__group">
-                    <label>
-                        Name: 
-                        <Form.Text name="name" value={garden.name} placeholder="Garden Name" onChange={(evt) => this.onGardenChange(evt, this.id, 'name')} />
-                    </label>
-                </Form.Group>
-                <Form.Group className="form__group">
-                    <label>
-                        Width: 
-                        <Form.Text name="width" value={garden.width} placeholder="Width" onChange={(evt) => this.onGardenChange(evt, this.id, 'width')} />
-                    </label>
-                </Form.Group>
-                <Form.Group className="form__group">
-                    <label>
-                        Height: 
-                        <Form.Text name="width" value={garden.height} placeholder="Height" onChange={(evt) => this.onGardenChange(evt, this.id, 'height')} />
-                    </label>
-                </Form.Group>
-                <div className="u-margin-top-small u-margin-bottom-small">
-                    <Form.Submit className="btn btn--secondary" value={__('Update Garden')} />
+        let form = <Modal title="Settings" cancel="Cancel" submit="Update Garden" onSubmit={this.onSettingsSubmit} onClose={() => this.setState({ ...this.state, showSettings: false })}>
+            <Form className="px-4 py-5 space-y-6 sm:p-6">
+                <div className="grid grid-cols-4 gap-6">
+                    <Form.Group className="col-span-4">
+                        <label className="block text-sm font-medium text-gray-700">Name</label>
+                        <div className="mt-1">
+                            <Form.Text className="px-3 py-2 focus:ring-green-500 focus:border-green-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border" name="name" value={garden.name} placeholder="Garden Name" onChange={(evt) => this.onGardenChange(evt, this.id, 'name')} />
+                        </div>
+                    </Form.Group>
+                    <Form.Group className="col-span-4 sm:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700">Width</label>
+                        <div className="mt-1">
+                            <Form.Text className="px-3 py-2 focus:ring-green-500 focus:border-green-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border" name="width" value={garden.width} placeholder="Width" onChange={(evt) => this.onGardenChange(evt, this.id, 'width')} />
+                        </div>
+                    </Form.Group>
+                    <Form.Group className="col-span-4 sm:col-span-2">
+                        <label className="block text-sm font-medium text-gray-700">Height</label>
+                        <div className="mt-1">
+                            <Form.Text className="px-3 py-2 focus:ring-green-500 focus:border-green-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border" name="width" value={garden.height} placeholder="Height" onChange={(evt) => this.onGardenChange(evt, this.id, 'height')} />
+                        </div>
+                    </Form.Group>
                 </div>
             </Form>
         </Modal>;
