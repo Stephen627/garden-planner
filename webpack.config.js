@@ -100,7 +100,7 @@ module.exports = {
                 'viewport': 'width=device-width, initial-scale=1, shrink-to-fit=no',
                 'theme-color': '#2ecc71'
             },
-            title: 'Garden Planner | Stephen James',
+            title: 'Veggie Grow | Stephen James',
             template: 'src/index.html',
             scriptLoading: 'defer',
             excludeChunks: [

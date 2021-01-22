@@ -1,4 +1,4 @@
-# Garden Planner #
+# Veggie Grow #
 
 ## Targets of the project ##
 - User login and account management
