@@ -56,7 +56,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                     </Link>
                 </div>
                 <div className="-mr-2 -my-2 md:hidden">
-                    <button type="button" onClick={ () => this.setState({...this.state, showMobileMenu: true}) } className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
+                    <button type="button" onClick={ () => this.setState({...this.state, showMobileMenu: true}) } className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500">
                         <span className="sr-only">Open menu</span>
                         <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -68,7 +68,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                     <Link className="text-base font-medium text-gray-500 hover:text-gray-900" to={PLANTS_URL}>{ __('Plants') }</Link>
                 </nav>
                 <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                    <a href="#" className="whitespace-nowrap text-base font-medium px-4 py-2 rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700" onClick={this.onSignOutClick}>
+                    <a href="#" className="whitespace-nowrap text-base font-medium px-4 py-2 rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700" onClick={this.onSignOutClick}>
                         { __('Sign Out') }
                     </a>
                 </div>
@@ -82,7 +82,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                                 <img className="h-8 w-auto" src={logo} alt="Logo"/>
                             </Link>
                             <div className="-mr-2">
-                                <button type="button" onClick={ () => this.setState({...this.state, showMobileMenu: false}) } className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
+                                <button type="button" onClick={ () => this.setState({...this.state, showMobileMenu: false}) } className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500">
                                     <span className="sr-only">Close menu</span>
                                     <svg className="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -106,7 +106,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                         </nav>
                     </div>
                     <div>
-                        <a href="#" className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-green-600 hover:bg-green-700">
+                        <a href="#" className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700">
                             { __('Sign out') }
                         </a>
                     </div>

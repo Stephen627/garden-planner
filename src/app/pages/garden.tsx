@@ -84,19 +84,19 @@ class Garden extends React.Component<GardenProps, GardenState> {
                     <Form.Group className="col-span-4">
                         <label className="block text-sm font-medium text-gray-700">Name</label>
                         <div className="mt-1">
-                            <Form.Text className="px-3 py-2 focus:ring-green-500 focus:border-green-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border" name="name" value={garden.name} placeholder="Garden Name" onChange={(evt) => this.onGardenChange(evt, this.id, 'name')} />
+                            <Form.Text className="px-3 py-2 focus:ring-primary-500 focus:border-primary-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border" name="name" value={garden.name} placeholder="Garden Name" onChange={(evt) => this.onGardenChange(evt, this.id, 'name')} />
                         </div>
                     </Form.Group>
                     <Form.Group className="col-span-4 sm:col-span-2">
                         <label className="block text-sm font-medium text-gray-700">Width</label>
                         <div className="mt-1">
-                            <Form.Text className="px-3 py-2 focus:ring-green-500 focus:border-green-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border" name="width" value={garden.width} placeholder="Width" onChange={(evt) => this.onGardenChange(evt, this.id, 'width')} />
+                            <Form.Text className="px-3 py-2 focus:ring-primary-500 focus:border-primary-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border" name="width" value={garden.width} placeholder="Width" onChange={(evt) => this.onGardenChange(evt, this.id, 'width')} />
                         </div>
                     </Form.Group>
                     <Form.Group className="col-span-4 sm:col-span-2">
                         <label className="block text-sm font-medium text-gray-700">Height</label>
                         <div className="mt-1">
-                            <Form.Text className="px-3 py-2 focus:ring-green-500 focus:border-green-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border" name="width" value={garden.height} placeholder="Height" onChange={(evt) => this.onGardenChange(evt, this.id, 'height')} />
+                            <Form.Text className="px-3 py-2 focus:ring-primary-500 focus:border-primary-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300 border" name="width" value={garden.height} placeholder="Height" onChange={(evt) => this.onGardenChange(evt, this.id, 'height')} />
                         </div>
                     </Form.Group>
                 </div>
