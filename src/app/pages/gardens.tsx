@@ -95,7 +95,7 @@ class Gardens extends React.Component<GardensProps, GardensState> {
                 viewComponent={(id: any, garden: Garden) => <Redirect to={GARDEN_URL.replace(/:id/, id + 1)}></Redirect>}
                 onEntityChange={this.onGardenChange}
                 onEntityListChange={this.onGardenListChange}
-                entities={this.props.gardens}
+                entities={this.props.gardens || []}
                 getName={(garden: Garden) => garden.name}
             />
         </Page>
