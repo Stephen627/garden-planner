@@ -6,19 +6,14 @@ interface entityListChange<T> {
     (entityList: T[]): void;
 }
 
-interface entityChange<T> {
-    (evt: React.ChangeEvent<HTMLInputElement>, id: number, change: keyof T): void;
-}
-
 interface getName<T> {
     (entity: T): string;
 }
 
 export interface EntityCrudProps<T> {
-    editModal: any;
-    viewComponent: any;
+    editModal?: any;
+    viewComponent?: any;
     onEntityListChange: entityListChange<T>;
-    onEntityChange: entityChange<T>;
     entities: T[];
     entityDefaults: T;
     entityNameSingular: string;
@@ -87,7 +82,7 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
                 {items}
             </List>
             {this.state.selectedEntity !== null &&
-                this.props.viewComponent(this.state.selectedEntity, this.props.entities[this.state.selectedEntity])
+                this.props.viewComponent(this.state.selectedEntity, this.props.entities[this.state.selectedEntity], () => this.setState({...this.state, selectedEntity: null}))
             }
         </div>;
     }
