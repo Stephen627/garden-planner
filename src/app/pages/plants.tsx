@@ -53,6 +53,7 @@ class Plants extends React.Component<PlantsProps, PlantsState> {
                 entityNameSingular="Plant"
                 entityNamePlural="Plants"
                 entityDefaults={this.defaultPlant}
+                viewString={ <span><i className="fas fa-pencil"></i> Edit</span> }
                 viewComponent={(id: any, plant: Plant, close: any) => <PlantView id={id} plant={plant} onClose={close} onUpdate={(id: number, plant: Plant) => { this.onPlantChange(id, plant); close(); } }></PlantView>}
                 onEntityListChange={this.onPlantListChange}
                 entities={this.props.plants || []}
