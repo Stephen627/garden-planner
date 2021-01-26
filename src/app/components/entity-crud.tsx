@@ -11,7 +11,6 @@ interface getName<T> {
 }
 
 export interface EntityCrudProps<T> {
-    editModal?: any;
     viewComponent?: any;
     onEntityListChange: entityListChange<T>;
     entities: T[];
