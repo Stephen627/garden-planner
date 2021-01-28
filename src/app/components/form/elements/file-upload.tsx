@@ -5,7 +5,12 @@ export interface FileUploadProps extends InputProps {
 }
 
 const FileUpload = (props: FileUploadProps) => {
-    return <input className={props.className} name={props.name} value={props.value || ''} type="file" placeholder={props.placeholder || ''} onChange={props.onChange}></input>
+    return <input
+        className={props.className}
+        name={props.name}
+        type="file"
+        onChange={props.onChange}
+    />;
 }
 
 export default FileUpload;
