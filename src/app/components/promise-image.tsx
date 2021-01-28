@@ -5,6 +5,7 @@ import Loading from './loading';
 export interface Props {
     imagePromise: Promise<string>;
     alt: string;
+    className?: string;
 }
 
 const PromiseImage = (props: Props) => {
@@ -18,10 +19,10 @@ const PromiseImage = (props: Props) => {
 
 
     if (!imageUrl) {
-        return <Loading />;
+        return <span className={props.className}><Loading /></span>;
     }
 
-    return <img src={imageUrl} alt={props.alt} />;
+    return <img className={props.className} src={imageUrl} alt={props.alt} />;
 };
 
 export default PromiseImage;
