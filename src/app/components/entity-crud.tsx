@@ -11,9 +11,10 @@ interface getName<T> {
 }
 
 export interface EntityCrudProps<T> {
-    editModal?: any;
     viewComponent?: any;
     onEntityListChange: entityListChange<T>;
+    viewString?: JSX.Element;
+    deleteString?: JSX.Element;
     entities: T[];
     entityDefaults: T;
     entityNameSingular: string;
@@ -68,8 +69,16 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
                 <div className="shadow-md border-2 border-gray-200 rounded-lg">
                     <h4 className="px-6 py-4 text-lg font-semibold">{this.props.getName(entity)}</h4>
                     <div className="flex justify-between border-t-2 border-gray-200 w-full">
-                        <div className="w-6/12 text-center p-2 border-r-2 border-gray-200"><a href="#" onClick={() => this.onEntityViewClick(id)}><i className="fa fa-eye"></i> View</a></div>
-                        <div className="w-6/12 text-center p-2"><a href="#" onClick={() => this.onDeleteClick(id)}><i className="fa fa-trash"></i> Delete</a></div>
+                        <div className="w-6/12 text-center p-2 border-r-2 border-gray-200">
+                            <a href="#" onClick={() => this.onEntityViewClick(id)}>
+                                { this.props.viewString || <span><i className="fa fa-eye"></i> View</span> }
+                            </a>
+                        </div>
+                        <div className="w-6/12 text-center p-2">
+                            <a href="#" onClick={() => this.onDeleteClick(id)}>
+                                { this.props.deleteString || <span><i className="fa fa-trash"></i> Delete</span>}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </Item>
