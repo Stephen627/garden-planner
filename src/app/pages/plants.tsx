@@ -21,6 +21,7 @@ export interface PlantsState {
 class Plants extends React.Component<PlantsProps, PlantsState> {
     private defaultPlant: Plant = {
         name: 'New Plant',
+        icon: '',
     };
 
     constructor (props: PlantsProps) {
