@@ -4,6 +4,7 @@ import Text from './elements/text';
 import Submit from './elements/submit';
 import Group from './elements/group';
 import Email from './elements/email';
+import FileUpload from './elements/file-upload';
 
 export enum FormMethod {
     PATCH = 'patch',
@@ -33,5 +34,6 @@ Form.Text = Text;
 Form.Submit = Submit;
 Form.Group = Group;
 Form.Email = Email;
+Form.FileUpload = FileUpload;
 
 export default Form;
