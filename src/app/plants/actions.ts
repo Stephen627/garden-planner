@@ -1,7 +1,7 @@
-import { setLoading } from "./general"
+import { setLoading } from "../actions/general"
 import Plant from "../utils/database/plant";
 import { db } from "../utils/db";
-import { Payload } from "./types";
+import { Payload } from "../actions/types";
 
 export interface PlantsState {
     list: Plant[]

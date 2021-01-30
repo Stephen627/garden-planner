@@ -1,4 +1,4 @@
-import { PlantsState, SET_PLANTS } from "../actions/plants";
+import { PlantsState, SET_PLANTS } from "./actions";
 import { Payload } from "../actions/types";
 
 const initialState: PlantsState = {

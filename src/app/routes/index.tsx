@@ -2,13 +2,13 @@ import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { PrivateRoute } from './private';
 
-const Register = React.lazy(() => import(/* webpackChunkName: 'pages/register' */ '../pages/register'));
-const Login = React.lazy(() => import(/* webpackChunkName: 'pages/login' */ '../pages/login'));
-const Dashboard = React.lazy(() => import(/* webpackChunkName: 'pages/dashboard' */ '../pages/dashboard'));
-const MyAccount = React.lazy(() => import(/* webpackChunkName: 'pages/my-account' */ '../pages/my-account'));
-const Gardens = React.lazy(() => import(/* webpackChunkName: 'pages/gardens' */ '../pages/gardens'));
-const Garden = React.lazy(() => import(/* webpackChunkName: 'pages/garden' */ '../pages/garden'));
-const Plants = React.lazy(() => import(/* webpackChunkName: 'pages/plants' */ '../pages/plants'));
+const Register = React.lazy(() => import(/* webpackChunkName: 'pages/register' */ '../account/register'));
+const Login = React.lazy(() => import(/* webpackChunkName: 'pages/login' */ '../account/login'));
+const Dashboard = React.lazy(() => import(/* webpackChunkName: 'pages/dashboard' */ '../dashboard/dashboard'));
+const MyAccount = React.lazy(() => import(/* webpackChunkName: 'pages/my-account' */ '../account/my-account'));
+const Gardens = React.lazy(() => import(/* webpackChunkName: 'pages/gardens' */ '../gardens/listing'));
+const Garden = React.lazy(() => import(/* webpackChunkName: 'pages/garden' */ '../gardens/record'));
+const Plants = React.lazy(() => import(/* webpackChunkName: 'pages/plants' */ '../plants/listing'));
 
 export const REGISTER_URL = '/register';
 export const LOGIN_URL = '/login';

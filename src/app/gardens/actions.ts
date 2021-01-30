@@ -1,7 +1,7 @@
-import { setLoading } from "./general"
+import { setLoading } from "../actions/general"
 import Garden from "../utils/database/garden";
 import { db } from "../utils/db";
-import { Payload } from "./types";
+import { Payload } from "../actions/types";
 
 export interface GardensState {
     list: Garden[]

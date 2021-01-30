@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Page } from '../layouts/logged-in';
 import EntityCrud from '../components/entity-crud';
-import { getPlants, updatePlants, setPlants } from '../actions/plants';
+import { getPlants, updatePlants, setPlants } from './actions';
 import { Auth } from '../utils/user';
 import Plant from '../utils/database/plant';
 import { connect } from 'react-redux';
-import PlantView from '../components/plant/view';
+import PlantView from './edit-modal';
 
 export interface PlantsProps {
     plants: Plant[];

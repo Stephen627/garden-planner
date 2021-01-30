@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Page } from '../layouts/logged-in';
 import { connect } from 'react-redux';
 import Garden from '../utils/database/garden';
-import { getGardens, updateGardens } from '../actions/gardens';
+import { getGardens, updateGardens } from './actions';
 import { Auth } from '../utils/user';
 import EntityCrud from '../components/entity-crud';
 import { __ } from '../utils/lang';
