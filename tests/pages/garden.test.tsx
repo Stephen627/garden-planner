@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render, cleanup, waitFor } from '@testing-library/react';
 
-import Garden, { GardenProps } from '../../src/app/pages/garden';
+import Garden, { GardenProps } from '../../src/app/gardens/record';
 import { db } from '../../src/app/utils/db';
 import { Auth } from '../../src/app/utils/user';
 import MockApp from '../mock-app';

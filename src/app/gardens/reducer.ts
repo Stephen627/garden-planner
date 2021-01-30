@@ -1,4 +1,4 @@
-import { GardensState, SET_GARDENS } from "../actions/gardens";
+import { GardensState, SET_GARDENS } from "./actions";
 import { Payload } from "../actions/types";
 
 const initialState: GardensState = {

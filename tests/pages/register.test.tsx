@@ -3,7 +3,7 @@ import { render, cleanup, waitFor, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
 import MockApp from '../mock-app';
-import Register from '../../src/app/pages/register';
+import Register from '../../src/app/account/register';
 import { Auth } from '../../src/app/utils/user';
 
 describe('Register Page', () => {

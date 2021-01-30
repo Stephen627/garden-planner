@@ -45,3 +45,5 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
         return <div className="overflow-auto mx-8"><div className="py-4 w-max">{rows}</div></div>
     }
 }
+
+export default GardenGrid;

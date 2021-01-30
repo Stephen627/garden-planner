@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Plant from '../../utils/database/plant';
-import Modal from '../modal';
-import Form from '../form';
-import { storage } from '../../utils/storage';
-import { Auth } from '../../utils/user';
-import PromiseImage from '../promise-image';
+import Plant from '../utils/database/plant';
+import Modal from '../components/modal';
+import Form from '../components/form';
+import { storage } from '../utils/storage';
+import { Auth } from '../utils/user';
+import PromiseImage from '../components/promise-image';
 
 export interface PlantViewProps {
     id: number;
