@@ -4,6 +4,8 @@ import { Link, Redirect } from 'react-router-dom';
 import { LOGIN_URL, PLANTS_URL, GARDENS_URL, ACCOUNT_URL, HOME_URL } from '../routes';
 import { Auth } from '../utils/user';
 import { __ } from '../utils/lang';
+import { db } from '../utils/db';
+import { storage } from '../utils/storage';
 
 const { default: logo } = require('../../images/logo.svg');
 
@@ -13,6 +15,7 @@ export interface HeaderState {
     toLogin: boolean;
     showMobileMenu: boolean;
     showAccountMenu: boolean;
+    userDetails: any;
 }
 
 export class Header extends React.Component<HeaderProps, HeaderState> {
@@ -25,7 +28,24 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
             toLogin: false,
             showMobileMenu: false,
             showAccountMenu: false,
+            userDetails: null,
         };
+    }
+
+    async componentDidMount () {
+        const uid = Auth.currentUser().uid;
+        const userDetails = await db.get(`user_details/${uid}`);
+        let url = null;
+        if (typeof userDetails.profile !== 'undefined' && userDetails.profile) {
+            url = await storage.get(`${uid}/${userDetails.profile}`);
+        }
+
+        userDetails.profile = url;
+
+        this.setState({
+            ...this.state,
+            userDetails
+        });
     }
 
     onSignOutClick () {
@@ -69,18 +89,20 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                     <Link className="text-base font-medium text-gray-500 hover:text-gray-900" to={GARDENS_URL}>{ __('Gardens') }</Link>
                     <Link className="text-base font-medium text-gray-500 hover:text-gray-900" to={PLANTS_URL}>{ __('Plants') }</Link>
                 </nav>
-                <div className="hidden relative md:flex items-center justify-end md:flex-1 lg:w-0">
-                    <div
-                        className="w-12 h-12 overflow-hidden border-2 border-primary-600 bg-gray-100 rounded-full shadow-sm opacity-100"
-                        onClick={ () => this.setState({ ...this.state, showAccountMenu: !this.state.showAccountMenu }) }
-                    >
-                        <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        <img
-                            src="https://via.placeholder.com/75"
-                            className="hidden"
-                        />
+                <div
+                    className="hidden relative md:flex items-center justify-end md:flex-1 lg:w-0 cursor-pointer"
+                    onClick={ () => this.setState({ ...this.state, showAccountMenu: !this.state.showAccountMenu }) }
+                >
+                    { this.state.userDetails ? <span className="mr-2 font-bold">{this.state.userDetails.first_name} {this.state.userDetails.last_name}</span> : '' }
+                    <div className="w-12 h-12 overflow-hidden border-2 border-primary-600 bg-gray-100 rounded-full shadow-sm opacity-100">
+                        {
+                            this.state.userDetails && this.state.userDetails.profile ?
+                            <img className="h-full w-full text-gray-300 object-cover" src={this.state.userDetails.profile} alt="Profile" />
+                            :
+                            <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                        }
                     </div>
                     { this.state.showAccountMenu &&
                         <div className="absolute py-4 px-2 top-24 w-60 flex flex-col text-right bg-white border-2 border-gray-100 rounded-md">
