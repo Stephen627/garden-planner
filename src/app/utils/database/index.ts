@@ -8,7 +8,7 @@ class Database {
         this.adapter = adapater;
     }
 
-    public get (ref: string): any {
+    public get (ref: string): Promise<any> {
         return this.adapter.get(ref);
     }
 

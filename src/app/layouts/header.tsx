@@ -12,6 +12,7 @@ export interface HeaderProps {
 export interface HeaderState {
     toLogin: boolean;
     showMobileMenu: boolean;
+    showAccountMenu: boolean;
 }
 
 export class Header extends React.Component<HeaderProps, HeaderState> {
@@ -23,6 +24,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
         this.state = {
             toLogin: false,
             showMobileMenu: false,
+            showAccountMenu: false,
         };
     }
 
@@ -67,10 +69,30 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                     <Link className="text-base font-medium text-gray-500 hover:text-gray-900" to={GARDENS_URL}>{ __('Gardens') }</Link>
                     <Link className="text-base font-medium text-gray-500 hover:text-gray-900" to={PLANTS_URL}>{ __('Plants') }</Link>
                 </nav>
-                <div className="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                    <a href="#" className="whitespace-nowrap text-base font-medium px-4 py-2 rounded-md shadow-sm text-white bg-primary-600 hover:bg-primary-700" onClick={this.onSignOutClick}>
-                        { __('Sign Out') }
-                    </a>
+                <div className="hidden relative md:flex items-center justify-end md:flex-1 lg:w-0">
+                    <div
+                        className="w-12 h-12 overflow-hidden border-2 border-primary-600 bg-gray-100 rounded-full shadow-sm opacity-100"
+                        onClick={ () => this.setState({ ...this.state, showAccountMenu: !this.state.showAccountMenu }) }
+                    >
+                        <svg className="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <img
+                            src="https://via.placeholder.com/75"
+                            className="hidden"
+                        />
+                    </div>
+                    { this.state.showAccountMenu &&
+                        <div className="absolute py-4 px-2 top-24 w-60 flex flex-col text-right bg-white border-2 border-gray-100 rounded-md">
+                            <Link
+                                to={ACCOUNT_URL}
+                                className="mb-2 pb-2 border-b-2 border-gray-100"
+                            >{ __('My Account') }</Link>
+                            <a href="#" className="whitespace-nowrap text-base font-medium" onClick={this.onSignOutClick}>
+                                { __('Sign Out') }
+                            </a>
+                        </div>
+                    }
                 </div>
             </div>
 
@@ -106,6 +128,10 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                         </nav>
                     </div>
                     <div>
+                        <Link
+                            to={ACCOUNT_URL}
+                            className="w-full flex items-center justify-center px-4 py-2 mb-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700"
+                        >{ __('My Account') }</Link>
                         <a href="#" className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700">
                             { __('Sign out') }
                         </a>
