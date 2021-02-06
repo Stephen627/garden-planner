@@ -13,6 +13,7 @@ module.exports = {
       secondary: colors.orange,
       gray: colors.gray,
       red: colors.red,
+      green: colors.green,
     },
     extend: {
       lineHeight: {

@@ -10,6 +10,7 @@ const Password = () => {
     const [ newPassword, setNewPassword ] = useState<string>('');
     const [ confirmNewPassword, setConfirmNewPassword ] = useState<string>('');
     const [ stateErrors, setStateErrors ] = useState<string[]>([]);
+    const [ success, setSuccess ] = useState<boolean>(false);
     const localErrors: string[] = [];
 
     const changePassword = async () => {
@@ -20,8 +21,13 @@ const Password = () => {
             setStateErrors([
                 __('Old password is not correct')
             ]);
+            return;
         }
-        user.updatePassword(newPassword);
+        await user.updatePassword(newPassword);
+        setSuccess(true);
+        setOldPassword('');
+        setNewPassword('');
+        setConfirmNewPassword('');
     }
 
     if (newPassword !== '' && confirmNewPassword !== '' && newPassword !== confirmNewPassword) {
@@ -48,6 +54,12 @@ const Password = () => {
                     {
                         errors.length ? <div className="w-full">
                                 { errors.map((error: string, index: number) => <div className="w-full bg-red-400 text-white text-center" key={index}>{error}</div>) }
+                            </div>
+                        : ''
+                    }
+                    {
+                        success ? <div className="w-full">
+                                <div className="w-full bg-green-400 text-white text-center">{ __('Password changed') }</div>
                             </div>
                         : ''
                     }
