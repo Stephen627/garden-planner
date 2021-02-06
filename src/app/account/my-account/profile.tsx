@@ -4,13 +4,15 @@ import { Auth } from '../../utils/user';
 import { db } from '../../utils/db';
 import { storage } from '../../utils/storage';
 import PromiseImage from '../../components/promise-image';
+import { __ } from '../../utils/lang';
 
 const { useEffect, useState } = React;
 
 const Profile = () => {
-    const [ firstName, setFirstName ] = useState('');
-    const [ lastName, setLastName ] = useState('');
-    const [ profile, setProfile ] = useState(null);
+    const [ firstName, setFirstName ] = useState<string>('');
+    const [ lastName, setLastName ] = useState<string>('');
+    const [ profile, setProfile ] = useState<File|string>(null);
+    const [ success, setSuccess ] = useState<boolean>(false);
 
     useEffect(() => {
         const id = Auth.currentUser().uid;
@@ -22,24 +24,26 @@ const Profile = () => {
         });
     }, []);
 
-    const updateData = () => {
+    const updateData = async () => {
         const id = Auth.currentUser().uid;
 
         if (profile instanceof File) {
-            storage.set(`${id}/profile`, profile).then(() => {
-                db.set(`user_details/${id}`, {
-                    first_name: firstName,
-                    last_name: lastName,
-                    profile: 'profile'
-                });
+            await storage.set(`${id}/profile`, profile);
+
+            await db.set(`user_details/${id}`, {
+                first_name: firstName,
+                last_name: lastName,
+                profile: 'profile'
             });
         } else {
-            db.set(`user_details/${id}`, {
+            await db.set(`user_details/${id}`, {
                 first_name: firstName,
                 last_name: lastName,
                 profile: profile
             });
         }
+
+        setSuccess(true);
     }
 
     const onFileUpload = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +55,7 @@ const Profile = () => {
         setProfile(file);
     }
     
-    const getImagePromise = async (url: string): Promise<string> => {
+    const getImagePromise = async (url: string|File): Promise<string> => {
         if (profile === null) {
             return '';
         }
@@ -81,6 +85,12 @@ const Profile = () => {
         <div className="mt-5 md:mt-0 md:col-span-2">
             <Form onSubmit={updateData}>
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
+                    {
+                        success ? <div className="w-full">
+                                <div className="w-full bg-green-400 text-center text-white">{ __('Details updated') }</div>
+                            </div>
+                        : ''
+                    }
                     <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
                         <div className="grid grid-cols-3 gap-6">
                             <Form.Group className="col-span-3 sm:col-span-2">
