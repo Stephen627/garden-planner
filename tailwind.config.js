@@ -13,6 +13,7 @@ module.exports = {
       secondary: colors.orange,
       gray: colors.gray,
       red: colors.red,
+      green: colors.green,
     },
     extend: {
       lineHeight: {
@@ -23,5 +24,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }

@@ -76,7 +76,6 @@ class PlantView extends React.Component<PlantViewProps, PlantViewState> {
 
     getImagePromise (url: string): Promise<string> {
         if (this.state.file) {
-
             return new Promise((resolve) => {
                 const reader = new FileReader();
                 reader.addEventListener('load', () => {
