@@ -25,6 +25,16 @@ export const updatePlants = (userID: string, plants: Plant[]) => {
     }
 }
 
+export const addPlant = (userId: string, plant: Plant) => {
+    return (dispatch: Function) => {
+        dispatch(setLoading(true));
+        db.push(`plants/${userId}`, plant).then(() => {
+            dispatch(getPlants(userId));
+            dispatch(setLoading(false));
+        });
+    }
+}
+
 export const getPlants = (userID: string) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));

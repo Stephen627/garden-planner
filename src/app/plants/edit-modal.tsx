@@ -45,9 +45,12 @@ class PlantView extends React.Component<PlantViewProps, PlantViewState> {
     async onUpdate () {
         const uid = Auth.currentUser().uid || null;
         const file = this.state.file;
+        let filename = null;
 
-        const filename = Math.random().toString(36);
-        await storage.set(`${uid}/${filename}`, file);
+        if (file) {
+            filename = Math.random().toString(36);
+            await storage.set(`${uid}/${filename}`, file);
+        }
 
         if (this.state.plant.icon) {
             storage.remove(`${uid}/${this.state.plant.icon}`);
@@ -101,7 +104,7 @@ class PlantView extends React.Component<PlantViewProps, PlantViewState> {
                 </Form.Group>
                 <Form.Group className="col-span-4">
                     <label className="block text-sm font-medium text-gray-700">
-                        { this.state.plant.icon && <PromiseImage className="inline-block w-20 mr-3" imagePromise={this.getImagePromise(this.state.plant.icon)} alt={this.state.plant.name} />}
+                        { (this.state.plant.icon || this.state.file) && <PromiseImage className="inline-block w-20 mr-3" imagePromise={this.getImagePromise(this.state.plant.icon)} alt={this.state.plant.name} />}
                         <div className="inline-block px-3 py-2 w-max focus:ring-primary-500 focus:border-primary-500 rounded-md sm:text-sm border-gray-300 border cursor-pointer hover:bg-gray-100">
                             Upload an icon
                         </div>
