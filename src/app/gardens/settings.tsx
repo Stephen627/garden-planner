@@ -21,6 +21,9 @@ const Settings = (props: Props) => {
             case 'height':
                 editedGarden[key] = parseInt(evt.target.value);
                 break;
+            case 'cells':
+                // You can not edit cells in this way
+                break;
             case 'name':
             default:
                 editedGarden[key] = evt.target.value;

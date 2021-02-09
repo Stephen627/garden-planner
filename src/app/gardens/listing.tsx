@@ -24,7 +24,8 @@ class Gardens extends React.Component<GardensProps, GardensState> {
     private defaultGarden: Garden = {
         name: 'New Garden',
         width: 20,
-        height: 20
+        height: 20,
+        cells: null
     };
 
     constructor (props: GardensProps) {

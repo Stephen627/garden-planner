@@ -2,6 +2,7 @@ import * as React from 'react';
 import { render, cleanup, waitFor } from '@testing-library/react';
 
 import Garden, { GardenProps } from '../../src/app/gardens/record';
+import GardenModel from '../../src/app/utils/database/garden';
 import { db } from '../../src/app/utils/db';
 import { Auth } from '../../src/app/utils/user';
 import MockApp from '../mock-app';
@@ -9,13 +10,14 @@ import MockApp from '../mock-app';
 describe('View Garden Page', () => {
     let container: HTMLElement = null;
     let fakeUserId: string = null;
-    const fakeGardens = [
-        {
+    const fakeGardens: { [key: string]: GardenModel} = {
+        'test': {
             height: 20,
             width: 20,
-            name: 'Test Garden 1'
+            name: 'Test Garden 1',
+            cells: null
         }
-    ];
+    };
     const generateProps = (id: string): GardenProps => {
         return {
             match: {
@@ -26,6 +28,7 @@ describe('View Garden Page', () => {
             getGardens: () => {},
             updateGardens: () => {},
             setGardens: () => {},
+            updateCell: () => {},
             gardens: fakeGardens
         };
     }

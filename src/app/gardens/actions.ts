@@ -2,6 +2,7 @@ import { setLoading } from "../actions/general"
 import Garden from "../utils/database/garden";
 import { db } from "../utils/db";
 import { Payload } from "../actions/types";
+import { CellContent, Coords } from "./grid";
 
 export interface GardensState {
     list: Garden[]
@@ -20,6 +21,16 @@ export const updateGardens = (userID: string, gardens: Garden[]) => {
         dispatch(setLoading(true));
         db.set(`gardens/${userID}`, gardens).then(() => {
             dispatch(getGardens(userID));
+            dispatch(setLoading(false));
+        });
+    }
+}
+
+export const updateCell = (userId: string, gardenId: string, coords: Coords, cellContents: CellContent) => {
+    return (dispatch: Function) => {
+        dispatch(setLoading(true));
+        db.set(`gardens/${userId}/${gardenId}/cells/${coords.x}/${coords.y}`, cellContents).then(() => {
+            dispatch(getGardens(userId));
             dispatch(setLoading(false));
         });
     }

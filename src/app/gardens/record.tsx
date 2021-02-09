@@ -4,10 +4,10 @@ import * as dayjs from 'dayjs';
 
 import { Page } from '../layouts/logged-in';
 import GardenModel from '../utils/database/garden';
-import { getGardens, updateGardens, setGardens } from './actions';
+import { getGardens, updateGardens, setGardens, updateCell } from './actions';
 import { Auth } from '../utils/user';
 import Loading from '../components/loading';
-import GardenGrid, { Coords } from './grid';
+import GardenGrid, { CellContent, Coords } from './grid';
 import { __ } from '../utils/lang';
 import Action from '../components/action';
 import Settings from './settings';
@@ -15,10 +15,11 @@ import CellModal from './cell-modal';
 
 export interface GardenProps {
     match: { params: { id: string } };
-    gardens: any;
+    gardens: { [key: string]: GardenModel };
     getGardens: Function;
     updateGardens: Function;
     setGardens: Function;
+    updateCell: Function;
 }
 
 export interface GardenState {
@@ -72,8 +73,10 @@ class Garden extends React.Component<GardenProps, GardenState> {
         });
     }
 
-    updateCell () {
-        console.log('update');
+    updateCell (cell: CellContent) {
+        const uid = Auth.currentUser().uid;
+        this.props.updateCell(uid, this.id, this.state.editingCell, cell);
+
         this.setState({
             ...this.state,
             editingCell: null
@@ -90,13 +93,13 @@ class Garden extends React.Component<GardenProps, GardenState> {
         return <Page title={garden.name}>
             { this.state.editingCell &&
                 <CellModal
-                    cell={null}
+                    cell={garden.cells[this.state.editingCell.x][this.state.editingCell.y]}
                     onUpdate={this.updateCell}
                     onClose={ () => this.setState({ ...this.state, editingCell: null }) }
                 />
             }
             <h4 className="text-center text-lg font-bold">{ this.state.month }</h4>
-            <GardenGrid onCellClick={this.onCellClick} width={garden.width} height={garden.height}></GardenGrid>
+            <GardenGrid cellContents={garden.cells || []} onCellClick={this.onCellClick} width={garden.width} height={garden.height}></GardenGrid>
             {
                 this.state.showSettings
                     && <Settings
@@ -122,6 +125,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     return {
         getGardens: (uid: string) => dispatch(getGardens(uid)),
         updateGardens: (uid: string, gardens: GardenModel[]) => dispatch(updateGardens(uid, gardens)),
+        updateCell: (uid: string, gardenId: string, coords: Coords, data: CellContent) => dispatch(updateCell(uid, gardenId, coords, data)),
         setGardens: (gardens: GardenModel[]) => dispatch(setGardens(gardens))
     }
 }
