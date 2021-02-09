@@ -75,7 +75,7 @@ class Garden extends React.Component<GardenProps, GardenState> {
 
     updateCell (cell: CellContent) {
         const uid = Auth.currentUser().uid;
-        this.props.updateCell(uid, this.id, this.state.editingCell, cell);
+        this.props.updateCell(uid, this.id, this.state.month, this.state.editingCell, cell);
 
         this.setState({
             ...this.state,
@@ -90,16 +90,22 @@ class Garden extends React.Component<GardenProps, GardenState> {
 
         const garden = this.props.gardens[this.id];
 
+        const cell = this.state.editingCell && typeof garden.cells !== 'undefined' &&
+            typeof garden.cells[this.state.month] !== 'undefined' &&
+            typeof garden.cells[this.state.month][this.state.editingCell.x] !== 'undefined' &&
+            typeof garden.cells[this.state.month][this.state.editingCell.x][this.state.editingCell.y] !== 'undefined'
+            ? garden.cells[this.state.month][this.state.editingCell.x][this.state.editingCell.y] : null;
+
         return <Page title={garden.name}>
             { this.state.editingCell &&
                 <CellModal
-                    cell={garden.cells[this.state.editingCell.x][this.state.editingCell.y]}
+                    cell={cell}
                     onUpdate={this.updateCell}
                     onClose={ () => this.setState({ ...this.state, editingCell: null }) }
                 />
             }
             <h4 className="text-center text-lg font-bold">{ this.state.month }</h4>
-            <GardenGrid cellContents={garden.cells || []} onCellClick={this.onCellClick} width={garden.width} height={garden.height}></GardenGrid>
+            <GardenGrid cellContents={garden.cells[this.state.month] || []} onCellClick={this.onCellClick} width={garden.width} height={garden.height}></GardenGrid>
             {
                 this.state.showSettings
                     && <Settings
@@ -125,7 +131,7 @@ const mapDispatchToProps = (dispatch: Function) => {
     return {
         getGardens: (uid: string) => dispatch(getGardens(uid)),
         updateGardens: (uid: string, gardens: GardenModel[]) => dispatch(updateGardens(uid, gardens)),
-        updateCell: (uid: string, gardenId: string, coords: Coords, data: CellContent) => dispatch(updateCell(uid, gardenId, coords, data)),
+        updateCell: (uid: string, gardenId: string, month: string, coords: Coords, data: CellContent) => dispatch(updateCell(uid, gardenId, month, coords, data)),
         setGardens: (gardens: GardenModel[]) => dispatch(setGardens(gardens))
     }
 }

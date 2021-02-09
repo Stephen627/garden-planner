@@ -26,10 +26,10 @@ export const updateGardens = (userID: string, gardens: Garden[]) => {
     }
 }
 
-export const updateCell = (userId: string, gardenId: string, coords: Coords, cellContents: CellContent) => {
+export const updateCell = (userId: string, gardenId: string, month: string, coords: Coords, cellContents: CellContent) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));
-        db.set(`gardens/${userId}/${gardenId}/cells/${coords.x}/${coords.y}`, cellContents).then(() => {
+        db.set(`gardens/${userId}/${gardenId}/cells/${month}/${coords.x}/${coords.y}`, cellContents).then(() => {
             dispatch(getGardens(userId));
             dispatch(setLoading(false));
         });
