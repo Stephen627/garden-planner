@@ -44,7 +44,7 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
                     background: null,
                     plant: null,
                 } : cellContents[i][j];
-                cells[j] = <Cell onClick={() => this.props.onCellClick({ x: j, y: i })} key={`${i}x${j}`} {...content} bottom={i === height - 1} right={j === width - 1}></Cell>;
+                cells[j] = <Cell onClick={() => this.props.onCellClick({ x: j, y: i })} key={`${j}x${i}`} {...content} bottom={i === height - 1} right={j === width - 1}></Cell>;
             }
             rows.push(<div key={i} className="flex flex-row">{cells}</div>);
         }
