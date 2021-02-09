@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import * as dayjs from 'dayjs';
 
 import { Page } from '../layouts/logged-in';
 import GardenModel from '../utils/database/garden';
 import { getGardens, updateGardens, setGardens } from './actions';
 import { Auth } from '../utils/user';
 import Loading from '../components/loading';
-import GardenGrid from './grid';
+import GardenGrid, { Coords } from './grid';
 import { __ } from '../utils/lang';
 import Action from '../components/action';
 import Settings from './settings';
-import { db } from '../utils/db';
+import CellModal from './cell-modal';
 
 export interface GardenProps {
     match: { params: { id: string } };
@@ -22,6 +23,8 @@ export interface GardenProps {
 
 export interface GardenState {
     showSettings: boolean;
+    editingCell: Coords;
+    month: string;
 }
 
 class Garden extends React.Component<GardenProps, GardenState> {
@@ -33,9 +36,15 @@ class Garden extends React.Component<GardenProps, GardenState> {
 
         this.id = this.props.match.params.id;
         this.onSettingsSubmit = this.onSettingsSubmit.bind(this);
+        this.onCellClick = this.onCellClick.bind(this);
+        this.updateCell = this.updateCell.bind(this);
+
+        const now = dayjs().set('day', 1);
         
         this.state = {
             showSettings: false,
+            editingCell: null,
+            month: now.format('MMMM YYYY')
         };
     }
 
@@ -56,6 +65,21 @@ class Garden extends React.Component<GardenProps, GardenState> {
         })
     }
 
+    onCellClick (coords: Coords) {
+        this.setState({
+            ...this.state,
+            editingCell: coords
+        });
+    }
+
+    updateCell () {
+        console.log('update');
+        this.setState({
+            ...this.state,
+            editingCell: null
+        });
+    }
+
     render () {
         if (this.props.gardens === null || !Object.keys(this.props.gardens).length) {
             return <Loading></Loading>
@@ -64,7 +88,15 @@ class Garden extends React.Component<GardenProps, GardenState> {
         const garden = this.props.gardens[this.id];
 
         return <Page title={garden.name}>
-            <GardenGrid width={garden.width} height={garden.height}></GardenGrid>
+            { this.state.editingCell &&
+                <CellModal
+                    cell={null}
+                    onUpdate={this.updateCell}
+                    onClose={ () => this.setState({ ...this.state, editingCell: null }) }
+                />
+            }
+            <h4 className="text-center text-lg font-bold">{ this.state.month }</h4>
+            <GardenGrid onCellClick={this.onCellClick} width={garden.width} height={garden.height}></GardenGrid>
             {
                 this.state.showSettings
                     && <Settings

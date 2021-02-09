@@ -5,6 +5,7 @@ export interface GardenGridProps {
     width: number;
     height: number;
     defaultCellContents?: CellContent[][];
+    onCellClick: (coords: Coords) => void;
 }
 
 export interface CellContent {
@@ -14,6 +15,11 @@ export interface CellContent {
 
 export interface GardenGridState {
     cellContents: CellContent[][];
+}
+
+export interface Coords {
+    x: number;
+    y: number;
 }
 
 export class GardenGrid extends React.Component<GardenGridProps, GardenGridState> {
@@ -38,7 +44,7 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
                     background: null,
                     plant: null,
                 } : cellContents[i][j];
-                cells[j] = <Cell key={`${i}x${j}`} {...content} bottom={i === height - 1} right={j === width - 1}></Cell>;
+                cells[j] = <Cell onClick={() => this.props.onCellClick({ x: j, y: i })} key={`${i}x${j}`} {...content} bottom={i === height - 1} right={j === width - 1}></Cell>;
             }
             rows.push(<div key={i} className="flex flex-row">{cells}</div>);
         }
