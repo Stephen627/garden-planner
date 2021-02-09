@@ -25,11 +25,31 @@ export const updateGardens = (userID: string, gardens: Garden[]) => {
     }
 }
 
+export const updateGarden = (userId: string, gardenId: string, garden: Garden) => {
+    return (dispatch: Function) => {
+        dispatch(setLoading(true));
+        db.set(`gardens/${userId}/${gardenId}`, garden).then(() => {
+            dispatch(getGardens(userId));
+            dispatch(setLoading(false));
+        });
+    }
+}
+
 export const getGardens = (userID: string) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));
         db.get(`gardens/${userID}`).then((data: Garden[]) => {
             dispatch(setGardens(data));
+            dispatch(setLoading(false));
+        });
+    }
+}
+
+export const addGarden = (userId: string, garden: Garden) => {
+    return (dispatch: Function) => {
+        dispatch(setLoading(true));
+        db.push(`gardens/${userId}`, garden).then(() => {
+            dispatch(getGardens(userId));
             dispatch(setLoading(false));
         });
     }

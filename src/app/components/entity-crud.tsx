@@ -3,7 +3,11 @@ import List, { Item } from './list';
 import Action from './action';
 
 interface entityListChange<T> {
-    (entityList: T[]): void;
+    (entityList: {[key: string]: T}): void;
+}
+
+interface onEntityAdd<T> {
+    (entity: T): void
 }
 
 interface getName<T> {
@@ -13,9 +17,10 @@ interface getName<T> {
 export interface EntityCrudProps<T> {
     viewComponent?: any;
     onEntityListChange: entityListChange<T>;
+    onEntityAdd: onEntityAdd<T>;
     viewString?: JSX.Element;
     deleteString?: JSX.Element;
-    entities: T[];
+    entities: {[key: string]: T};
     entityDefaults: T;
     entityNameSingular: string;
     entityNamePlural: string;
@@ -47,24 +52,20 @@ class EntityCrud<T> extends React.Component<EntityCrudProps<T>, EntityCrudState>
         });
     }
 
-    onDeleteClick (id: number) {
-        const entities = [ ...this.props.entities ];
-        entities.splice(id, 1);
-
-        this.props.onEntityListChange(entities.filter((entity) => entity));
-    }
-
-    onCreateClick () {
-        const entities = [ ...this.props.entities ];
-        entities.push({
-            ...this.props.entityDefaults
-        });
+    onDeleteClick (id: any) {
+        const entities = { ...this.props.entities };
+        delete entities[id];
 
         this.props.onEntityListChange(entities);
     }
 
+    onCreateClick () {
+        this.props.onEntityAdd(this.props.entityDefaults);
+    }
+
     render () {
-        const items = this.props.entities.map((entity: T, id: number) => {
+        const items = Object.keys(this.props.entities).map((id: any) => {
+            const entity: T = this.props.entities[id];
             return <Item key={id} className="p-4 w-full md:w-4/12 lg:w-3/12">
                 <div className="shadow-md border-2 border-gray-200 rounded-lg">
                     <h4 className="px-6 py-4 text-lg font-semibold">{this.props.getName(entity)}</h4>
