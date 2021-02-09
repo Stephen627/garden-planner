@@ -10,10 +10,11 @@ import GardenGrid from './grid';
 import { __ } from '../utils/lang';
 import Action from '../components/action';
 import Settings from './settings';
+import { db } from '../utils/db';
 
 export interface GardenProps {
     match: { params: { id: string } };
-    gardens: GardenModel[];
+    gardens: any;
     getGardens: Function;
     updateGardens: Function;
     setGardens: Function;
@@ -25,16 +26,16 @@ export interface GardenState {
 
 class Garden extends React.Component<GardenProps, GardenState> {
 
-    private id: number;
+    private id: string;
 
     constructor (props: GardenProps) {
         super(props);
 
-        this.id = parseInt(this.props.match.params.id) - 1;
+        this.id = this.props.match.params.id;
         this.onSettingsSubmit = this.onSettingsSubmit.bind(this);
         
         this.state = {
-            showSettings: false
+            showSettings: false,
         };
     }
 
@@ -56,20 +57,18 @@ class Garden extends React.Component<GardenProps, GardenState> {
     }
 
     render () {
-        if (!this.props.gardens.length) {
+        if (this.props.gardens === null || !Object.keys(this.props.gardens).length) {
             return <Loading></Loading>
         }
 
-        const garden: GardenModel = this.props.gardens[this.id];
-
-        let form = '';
+        const garden = this.props.gardens[this.id];
 
         return <Page title={garden.name}>
             <GardenGrid width={garden.width} height={garden.height}></GardenGrid>
             {
                 this.state.showSettings
                     && <Settings
-                            garden={this.props.gardens[this.id]}
+                            garden={garden}
                             onSubmit={this.onSettingsSubmit}
                             onClose={() => this.setState({ ...this.state, showSettings: false})}
                         />

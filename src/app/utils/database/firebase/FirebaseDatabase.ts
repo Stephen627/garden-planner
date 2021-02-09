@@ -17,6 +17,16 @@ class FirebaseDatabase implements DatabaseInterface {
         });
     }
 
+    public push (ref: string, data: any): Promise<string> {
+        return new Promise((resolve, reject) => {
+            database.ref(ref).push(data).then(reference => {
+                resolve(reference.key);
+            }).catch(err => {
+                reject(err);
+            });
+        });
+    }
+
     public set (ref: string, data: any): Promise<any> {
         return database.ref(ref).set(data);
     }
