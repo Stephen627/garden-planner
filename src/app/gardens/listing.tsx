@@ -10,7 +10,7 @@ import {  Redirect } from 'react-router-dom';
 import { GARDEN_URL } from '../routes';
 
 export interface GardensProps {
-    gardens: Garden[];
+    gardens: { [key: string]: Garden };
     getGardens: Function;
     updateGardens: Function;
     addGarden: Function;
@@ -39,7 +39,7 @@ class Gardens extends React.Component<GardensProps, GardensState> {
         this.props.getGardens(uid);
     }
 
-    onGardenListChange (gardens: Garden[]) {
+    onGardenListChange (gardens: { [key: string]: Garden}) {
         const uid = Auth.currentUser().uid || null;
         this.props.updateGardens(uid, gardens);
     }
@@ -58,7 +58,7 @@ class Gardens extends React.Component<GardensProps, GardensState> {
                 viewComponent={(id: any, garden: Garden) => <Redirect to={GARDEN_URL.replace(/:id/, id)}></Redirect>}
                 onEntityListChange={this.onGardenListChange}
                 onEntityAdd={this.onGardenAdd}
-                entities={this.props.gardens || []}
+                entities={this.props.gardens || {}}
                 getName={(garden: Garden) => garden.name}
             />
         </Page>
