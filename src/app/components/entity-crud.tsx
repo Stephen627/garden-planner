@@ -3,7 +3,7 @@ import List, { Item } from './list';
 import Action from './action';
 
 interface entityListChange<T> {
-    (entityList: T[]): void;
+    (entityList: {[key: string]: T}): void;
 }
 
 interface onEntityAdd<T> {
@@ -20,7 +20,7 @@ export interface EntityCrudProps<T> {
     onEntityAdd: onEntityAdd<T>;
     viewString?: JSX.Element;
     deleteString?: JSX.Element;
-    entities: T[];
+    entities: {[key: string]: T};
     entityDefaults: T;
     entityNameSingular: string;
     entityNamePlural: string;

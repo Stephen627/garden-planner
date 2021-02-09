@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import PlantView from './edit-modal';
 
 export interface PlantsProps {
-    plants: any;
+    plants: { [key: string]: Plant }
     getPlants: Function;
     updatePlants: Function;
     addPlant: Function;
@@ -38,12 +38,12 @@ class Plants extends React.Component<PlantsProps, PlantsState> {
         this.props.getPlants(uid);
     }
 
-    onPlantListChange (plants: Plant[]) {
+    onPlantListChange (plants: {[key: string]: Plant}) {
         const uid = Auth.currentUser().uid || null;
         this.props.updatePlants(uid, plants);
     }
 
-    onPlantChange (id: number, plant: Plant) {
+    onPlantChange (id: string, plant: Plant) {
         const plants = { ...this.props.plants };
         plants[id] = plant;
 
@@ -62,10 +62,10 @@ class Plants extends React.Component<PlantsProps, PlantsState> {
                 entityNamePlural="Plants"
                 entityDefaults={this.defaultPlant}
                 viewString={ <span><i className="fas fa-pencil"></i> Edit</span> }
-                viewComponent={(id: any, plant: Plant, close: any) => <PlantView id={id} plant={plant} onClose={close} onUpdate={(id: number, plant: Plant) => { this.onPlantChange(id, plant); close(); } }></PlantView>}
+                viewComponent={(id: any, plant: Plant, close: any) => <PlantView id={id} plant={plant} onClose={close} onUpdate={(id: string, plant: Plant) => { this.onPlantChange(id, plant); close(); } }></PlantView>}
                 onEntityListChange={this.onPlantListChange}
                 onEntityAdd={this.onPlantAdd}
-                entities={this.props.plants || []}
+                entities={this.props.plants || {}}
                 getName={(plant: Plant) => plant.name}
             >
             </EntityCrud>
