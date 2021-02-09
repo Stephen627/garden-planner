@@ -45,19 +45,20 @@ class PlantView extends React.Component<PlantViewProps, PlantViewState> {
     async onUpdate () {
         const uid = Auth.currentUser().uid || null;
         const file = this.state.file;
-        let filename = null;
+        const plant = { ...this.state.plant };
 
         if (file) {
-            filename = Math.random().toString(36);
+            const filename = Math.random().toString(36);
             await storage.set(`${uid}/${filename}`, file);
-        }
+        
 
-        if (this.state.plant.icon) {
-            storage.remove(`${uid}/${this.state.plant.icon}`);
-        }
+            if (this.state.plant.icon) {
+                storage.remove(`${uid}/${this.state.plant.icon}`);
+            }
 
-        const plant = { ...this.state.plant };
-        plant.icon = filename;
+            plant.icon = filename;
+        }
+        
         this.setState({
             ...this.state,
             plant
