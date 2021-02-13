@@ -4,6 +4,7 @@ import * as dayjs from 'dayjs';
 
 import { Page } from '../layouts/logged-in';
 import GardenModel from '../utils/database/garden';
+import Plant from '../utils/database/plant';
 import { getGardens, updateGardens, setGardens, updateCell } from './actions';
 import { Auth } from '../utils/user';
 import Loading from '../components/loading';
@@ -14,11 +15,14 @@ import Settings from './settings';
 import CellModal from './cell-modal';
 import Form from '../components/form';
 import { getMonthOptionsBetween } from '../utils/dates';
+import { getPlants } from '../plants/actions';
 
 export interface GardenProps {
     match: { params: { id: string } };
     gardens: { [key: string]: GardenModel };
+    plants: { [key: string]: Plant };
     getGardens: Function;
+    getPlants: Function;
     updateGardens: Function;
     setGardens: Function;
     updateCell: Function;
@@ -54,6 +58,7 @@ class Garden extends React.Component<GardenProps, GardenState> {
     componentDidMount () {
         const uid = Auth.currentUser().uid || null;
         this.props.getGardens(uid);
+        this.props.getPlants(uid);
     }
 
     onSettingsSubmit (garden: GardenModel) {
@@ -102,6 +107,7 @@ class Garden extends React.Component<GardenProps, GardenState> {
             { this.state.editingCell &&
                 <CellModal
                     cell={cell}
+                    plants={this.props.plants}
                     onUpdate={this.updateCell}
                     onClose={ () => this.setState({ ...this.state, editingCell: null }) }
                 />
@@ -131,7 +137,8 @@ class Garden extends React.Component<GardenProps, GardenState> {
 
 const mapStateToProps = (state: any) => {
     return {
-        gardens: state.garden.list
+        gardens: state.garden.list,
+        plants: state.plants.list
     }
 }
 
@@ -140,7 +147,8 @@ const mapDispatchToProps = (dispatch: Function) => {
         getGardens: (uid: string) => dispatch(getGardens(uid)),
         updateGardens: (uid: string, gardens: GardenModel[]) => dispatch(updateGardens(uid, gardens)),
         updateCell: (uid: string, gardenId: string, month: string, coords: Coords, data: CellContent) => dispatch(updateCell(uid, gardenId, month, coords, data)),
-        setGardens: (gardens: GardenModel[]) => dispatch(setGardens(gardens))
+        setGardens: (gardens: GardenModel[]) => dispatch(setGardens(gardens)),
+        getPlants: (uid: string) => dispatch(getPlants(uid)),
     }
 }
 

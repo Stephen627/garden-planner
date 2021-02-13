@@ -26,10 +26,12 @@ describe('View Garden Page', () => {
                 }
             },
             getGardens: () => {},
+            getPlants: () => {},
             updateGardens: () => {},
             setGardens: () => {},
             updateCell: () => {},
-            gardens: fakeGardens
+            gardens: fakeGardens,
+            plants: {}
         };
     }
 

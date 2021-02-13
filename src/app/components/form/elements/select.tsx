@@ -9,14 +9,27 @@ export interface Props {
     options: Option[];
     className?: string;
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+    value?: string;
+    provideDefault?: boolean;
 }
 
 const Select: React.FC<Props> = (props: Props) => {
     const options = props.options.map((option: Option) => {
-        return <option key={option.value} value={option.value}>{option.name}</option>;
+        const optionProps: { [key: string]: string } = {
+            key: option.value,
+            value: option.value
+        };
+        if (option.value === props.value) {
+            optionProps['selected'] = 'selected';
+        }
+
+        return <option {...optionProps}>
+            {option.name}
+        </option>;
     });
 
     return <select className={props.className} onChange={props.onChange}>
+        { props.provideDefault ? <option value="">-- None --</option> : ''}
         {options}
     </select>;
 }
