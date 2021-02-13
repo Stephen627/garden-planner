@@ -12,6 +12,8 @@ import { __ } from '../utils/lang';
 import Action from '../components/action';
 import Settings from './settings';
 import CellModal from './cell-modal';
+import Form from '../components/form';
+import { getMonthOptionsBetween } from '../utils/dates';
 
 export interface GardenProps {
     match: { params: { id: string } };
@@ -104,7 +106,13 @@ class Garden extends React.Component<GardenProps, GardenState> {
                     onClose={ () => this.setState({ ...this.state, editingCell: null }) }
                 />
             }
-            <h4 className="text-center text-lg font-bold">{ this.state.month }</h4>
+            <h4 className="text-center text-lg font-bold">
+                <Form.Select
+                    className="focus:ring-primary-500 focus:border-primary-500"
+                    options={ getMonthOptionsBetween(dayjs(), dayjs().add(24, 'months')) }
+                    onChange={(evt) => this.setState({ ...this.state, month: evt.target.value })}
+                />
+            </h4>
             <GardenGrid cellContents={garden.cells[this.state.month] || []} onCellClick={this.onCellClick} width={garden.width} height={garden.height}></GardenGrid>
             {
                 this.state.showSettings

@@ -36,9 +36,9 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
                 } : cellContents[i][j];
                 cells[j] = <Cell onClick={() => this.props.onCellClick({ x: j, y: i })} key={`${j}x${i}`} {...content} bottom={i === height - 1} right={j === width - 1}></Cell>;
             }
-            rows.push(<div key={i} className="flex flex-row">{cells}</div>);
+            rows.push(<div key={i} className="flex flex-row justify-center">{cells}</div>);
         }
-        return <div className="overflow-auto mx-8"><div className="py-4 w-max">{rows}</div></div>
+        return <div className="overflow-auto"><div className="py-4 w-screen">{rows}</div></div>
     }
 }
 
