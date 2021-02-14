@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { Page } from '../layouts/logged-in';
 import Loading from '../components/loading';
+import { Redirect } from 'react-router-dom';
+import { GARDENS_URL } from '../routes';
 
 export interface DashboardProps {
 }
@@ -19,7 +21,7 @@ class Dashboard extends React.Component<DashboardProps, DashboardState> {
 
         return <Page overflow-auto>
             <div data-testid="dashboard" className="dashboard">
-                <Loading></Loading>
+                <Redirect to={GARDENS_URL} />
             </div>
         </Page>
     }
