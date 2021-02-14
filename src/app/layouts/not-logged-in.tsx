@@ -10,8 +10,8 @@ export const Page = (props: any) => {
             </div>
             {props.children}
         </div>
-        <div className="w-full sm:w-full lg:w-8/12 bg-primary-400">
-            <img src={loginImage} className="h-full object-cover opacity-30" />
+        <div className="max-h-screen w-full sm:w-full lg:w-8/12 bg-primary-400">
+            <img src={loginImage} className="h-full object-cover opacity-30" alt="Man holding carrots" />
         </div>
     </div>
 }

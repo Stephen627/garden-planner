@@ -2,6 +2,7 @@ import { setLoading } from "../actions/general"
 import Garden from "../utils/database/garden";
 import { db } from "../utils/db";
 import { Payload } from "../actions/types";
+import { CellContent, Coords } from "./grid";
 
 export interface GardensState {
     list: Garden[]
@@ -22,6 +23,34 @@ export const updateGardens = (userID: string, gardens: Garden[]) => {
             dispatch(getGardens(userID));
             dispatch(setLoading(false));
         });
+    }
+}
+
+export const updateCell = (userId: string, gardenId: string, month: string, coords: Coords, cellContents: CellContent) => {
+    return (dispatch: Function) => {
+        dispatch(setLoading(true));
+        db.set(`gardens/${userId}/${gardenId}/cells/${month}/${coords.x}/${coords.y}`, cellContents).then(() => {
+            dispatch(getGardens(userId));
+            dispatch(setLoading(false));
+        });
+    }
+}
+
+export const updateCells = (userId: string, gardenId: string, month: string, coords: Coords[], cellContents: CellContent) => {
+    return (dispatch: Function) => {
+        dispatch(setLoading(true));
+        const promises: Promise<any>[] = [];
+
+        coords.forEach((coord: Coords) => {
+            promises.push(
+                db.set(`gardens/${userId}/${gardenId}/cells/${month}/${coord.x}/${coord.y}`, cellContents)
+            );
+        });
+
+        Promise.all(promises).then(() => {
+            dispatch(getGardens(userId));
+            dispatch(setLoading(false));
+        })
     }
 }
 

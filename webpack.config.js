@@ -102,6 +102,7 @@ module.exports = {
             },
             title: 'Veggie Grow | Stephen James',
             template: 'src/index.html',
+            inject: 'body',
             scriptLoading: 'defer',
             excludeChunks: [
                 'pages/register',
