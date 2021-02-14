@@ -5,7 +5,7 @@ import * as dayjs from 'dayjs';
 import { Page } from '../layouts/logged-in';
 import GardenModel from '../utils/database/garden';
 import Plant from '../utils/database/plant';
-import { getGardens, updateGardens, setGardens, updateCell } from './actions';
+import { getGardens, updateGardens, setGardens, updateCell, updateCells } from './actions';
 import { Auth } from '../utils/user';
 import Loading from '../components/loading';
 import GardenGrid, { CellContent, Coords } from './grid';
@@ -26,11 +26,12 @@ export interface GardenProps {
     updateGardens: Function;
     setGardens: Function;
     updateCell: Function;
+    updateCells: Function;
 }
 
 export interface GardenState {
     showSettings: boolean;
-    editingCell: Coords;
+    editingCells: Coords[];
     month: string;
 }
 
@@ -43,14 +44,14 @@ class Garden extends React.Component<GardenProps, GardenState> {
 
         this.id = this.props.match.params.id;
         this.onSettingsSubmit = this.onSettingsSubmit.bind(this);
-        this.onCellClick = this.onCellClick.bind(this);
+        this.onCellSelect = this.onCellSelect.bind(this);
         this.updateCell = this.updateCell.bind(this);
 
         const now = dayjs().set('day', 1);
         
         this.state = {
             showSettings: false,
-            editingCell: null,
+            editingCells: null,
             month: now.format('MMMM YYYY')
         };
     }
@@ -73,20 +74,20 @@ class Garden extends React.Component<GardenProps, GardenState> {
         })
     }
 
-    onCellClick (coords: Coords) {
+    onCellSelect(coords: Coords[]) {
         this.setState({
             ...this.state,
-            editingCell: coords
+            editingCells: coords
         });
     }
 
     updateCell (cell: CellContent) {
         const uid = Auth.currentUser().uid;
-        this.props.updateCell(uid, this.id, this.state.month, this.state.editingCell, cell);
+        this.props.updateCells(uid, this.id, this.state.month, this.state.editingCells, cell);
 
         this.setState({
             ...this.state,
-            editingCell: null
+            editingCells: null
         });
     }
 
@@ -97,19 +98,20 @@ class Garden extends React.Component<GardenProps, GardenState> {
 
         const garden = this.props.gardens[this.id];
 
-        const cell = this.state.editingCell && typeof garden.cells !== 'undefined' &&
+        const cell = this.state.editingCells && typeof garden.cells !== 'undefined' &&
+            this.state.editingCells.length === 1 &&
             typeof garden.cells[this.state.month] !== 'undefined' &&
-            typeof garden.cells[this.state.month][this.state.editingCell.x] !== 'undefined' &&
-            typeof garden.cells[this.state.month][this.state.editingCell.x][this.state.editingCell.y] !== 'undefined'
-            ? garden.cells[this.state.month][this.state.editingCell.x][this.state.editingCell.y] : null;
+            typeof garden.cells[this.state.month][this.state.editingCells[0].x] !== 'undefined' &&
+            typeof garden.cells[this.state.month][this.state.editingCells[0].x][this.state.editingCells[0].y] !== 'undefined'
+            ? garden.cells[this.state.month][this.state.editingCells[0].x][this.state.editingCells[0].y] : null;
 
         return <Page title={garden.name}>
-            { this.state.editingCell &&
+            { this.state.editingCells &&
                 <CellModal
                     cell={cell}
                     plants={this.props.plants}
                     onUpdate={this.updateCell}
-                    onClose={ () => this.setState({ ...this.state, editingCell: null }) }
+                    onClose={ () => this.setState({ ...this.state, editingCells: null }) }
                 />
             }
             <h4 className="text-center text-lg font-bold">
@@ -121,7 +123,7 @@ class Garden extends React.Component<GardenProps, GardenState> {
             </h4>
             <GardenGrid
                 cellContents={garden.cells[this.state.month] || []}
-                onCellClick={this.onCellClick}
+                onCellSelect={this.onCellSelect}
                 width={garden.width}
                 height={garden.height}
                 plants={this.props.plants}
@@ -153,6 +155,7 @@ const mapDispatchToProps = (dispatch: Function) => {
         getGardens: (uid: string) => dispatch(getGardens(uid)),
         updateGardens: (uid: string, gardens: GardenModel[]) => dispatch(updateGardens(uid, gardens)),
         updateCell: (uid: string, gardenId: string, month: string, coords: Coords, data: CellContent) => dispatch(updateCell(uid, gardenId, month, coords, data)),
+        updateCells: (uid: string, gardenId: string, month: string, coords: Coords[], data: CellContent) => dispatch(updateCells(uid, gardenId, month, coords, data)),
         setGardens: (gardens: GardenModel[]) => dispatch(setGardens(gardens)),
         getPlants: (uid: string) => dispatch(getPlants(uid)),
     }

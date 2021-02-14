@@ -36,6 +36,24 @@ export const updateCell = (userId: string, gardenId: string, month: string, coor
     }
 }
 
+export const updateCells = (userId: string, gardenId: string, month: string, coords: Coords[], cellContents: CellContent) => {
+    return (dispatch: Function) => {
+        dispatch(setLoading(true));
+        const promises: Promise<any>[] = [];
+
+        coords.forEach((coord: Coords) => {
+            promises.push(
+                db.set(`gardens/${userId}/${gardenId}/cells/${month}/${coord.x}/${coord.y}`, cellContents)
+            );
+        });
+
+        Promise.all(promises).then(() => {
+            dispatch(getGardens(userId));
+            dispatch(setLoading(false));
+        })
+    }
+}
+
 export const updateGarden = (userId: string, gardenId: string, garden: Garden) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));
