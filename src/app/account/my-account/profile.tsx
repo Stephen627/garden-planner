@@ -17,7 +17,11 @@ const Profile = () => {
     useEffect(() => {
         const id = Auth.currentUser().uid;
 
-        db.get(`user_details/${id}`).then((data) => {
+        db.get(`${id}/user_details`).then((data) => {
+            if (!data) {
+                return;
+            }
+
             setFirstName(data.first_name);
             setLastName(data.last_name);
             setProfile(data.profile || null);
@@ -30,13 +34,13 @@ const Profile = () => {
         if (profile instanceof File) {
             await storage.set(`${id}/profile`, profile);
 
-            await db.set(`user_details/${id}`, {
+            await db.set(`${id}/user_details`, {
                 first_name: firstName,
                 last_name: lastName,
                 profile: 'profile'
             });
         } else {
-            await db.set(`user_details/${id}`, {
+            await db.set(`${id}/user_details`, {
                 first_name: firstName,
                 last_name: lastName,
                 profile: profile

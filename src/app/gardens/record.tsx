@@ -122,7 +122,7 @@ class Garden extends React.Component<GardenProps, GardenState> {
                 />
             </h4>
             <GardenGrid
-                cellContents={garden.cells[this.state.month] || []}
+                cellContents={garden.cells && garden.cells[this.state.month] || []}
                 onCellSelect={this.onCellSelect}
                 width={garden.width}
                 height={garden.height}

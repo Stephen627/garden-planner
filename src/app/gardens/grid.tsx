@@ -53,7 +53,7 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
                     }
                 } : cellContents[j][i];
 
-                if (typeof this.props.plants !== 'undefined' && typeof this.props.plants[content.plant] !== 'undefined') {
+                if (content.plant && typeof this.props.plants !== 'undefined' && typeof this.props.plants[content.plant] !== 'undefined') {
                     content.plantData = this.props.plants[content.plant];
                 }
 

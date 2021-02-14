@@ -50,7 +50,7 @@ describe('View Garden Page', () => {
     beforeAll(async () => {
         await Auth.register('test-garden@stephenjames.dev', 'test123');
         fakeUserId = Auth.currentUser().uid;
-        db.set(`gardens/${fakeUserId}`, fakeGardens);
+        db.set(`${fakeUserId}/gardens`, fakeGardens);
     });
 
     afterAll(async () => {

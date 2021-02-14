@@ -51,7 +51,7 @@ class CellModal extends React.Component<Props, State> {
     render () {
 
         const options: Option[] = [];
-        Object.keys(this.props.plants).forEach((key: string) => {
+        this.props.plants && Object.keys(this.props.plants).forEach((key: string) => {
             options.push({
                 name: this.props.plants[key].name,
                 value: key

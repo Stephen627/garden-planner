@@ -19,7 +19,7 @@ export const setGardens = (gardens: Garden[]): Payload => {
 export const updateGardens = (userID: string, gardens: Garden[]) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));
-        db.set(`gardens/${userID}`, gardens).then(() => {
+        db.set(`${userID}/gardens`, gardens).then(() => {
             dispatch(getGardens(userID));
             dispatch(setLoading(false));
         });
@@ -29,7 +29,7 @@ export const updateGardens = (userID: string, gardens: Garden[]) => {
 export const updateCell = (userId: string, gardenId: string, month: string, coords: Coords, cellContents: CellContent) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));
-        db.set(`gardens/${userId}/${gardenId}/cells/${month}/${coords.x}/${coords.y}`, cellContents).then(() => {
+        db.set(`${userId}/gardens/${gardenId}/cells/${month}/${coords.x}/${coords.y}`, cellContents).then(() => {
             dispatch(getGardens(userId));
             dispatch(setLoading(false));
         });
@@ -43,7 +43,7 @@ export const updateCells = (userId: string, gardenId: string, month: string, coo
 
         coords.forEach((coord: Coords) => {
             promises.push(
-                db.set(`gardens/${userId}/${gardenId}/cells/${month}/${coord.x}/${coord.y}`, cellContents)
+                db.set(`${userId}/gardens/${gardenId}/cells/${month}/${coord.x}/${coord.y}`, cellContents)
             );
         });
 
@@ -57,7 +57,7 @@ export const updateCells = (userId: string, gardenId: string, month: string, coo
 export const updateGarden = (userId: string, gardenId: string, garden: Garden) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));
-        db.set(`gardens/${userId}/${gardenId}`, garden).then(() => {
+        db.set(`${userId}/gardens/${gardenId}`, garden).then(() => {
             dispatch(getGardens(userId));
             dispatch(setLoading(false));
         });
@@ -67,7 +67,7 @@ export const updateGarden = (userId: string, gardenId: string, garden: Garden) =
 export const getGardens = (userID: string) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));
-        db.get(`gardens/${userID}`).then((data: Garden[]) => {
+        db.get(`${userID}/gardens`).then((data: Garden[]) => {
             dispatch(setGardens(data));
             dispatch(setLoading(false));
         });
@@ -77,7 +77,7 @@ export const getGardens = (userID: string) => {
 export const addGarden = (userId: string, garden: Garden) => {
     return (dispatch: Function) => {
         dispatch(setLoading(true));
-        db.push(`gardens/${userId}`, garden).then(() => {
+        db.push(`${userId}/gardens`, garden).then(() => {
             dispatch(getGardens(userId));
             dispatch(setLoading(false));
         });

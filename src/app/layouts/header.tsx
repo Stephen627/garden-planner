@@ -34,13 +34,15 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
 
     async componentDidMount () {
         const uid = Auth.currentUser().uid;
-        const userDetails = await db.get(`user_details/${uid}`);
-        let url = null;
-        if (typeof userDetails.profile !== 'undefined' && userDetails.profile) {
-            url = await storage.get(`${uid}/${userDetails.profile}`);
-        }
+        const userDetails = await db.get(`${uid}/user_details`);
+        if (userDetails) {
+            let url = null;
+            if (typeof userDetails.profile !== 'undefined' && userDetails.profile) {
+                url = await storage.get(`${uid}/${userDetails.profile}`);
+            }
 
-        userDetails.profile = url;
+            userDetails.profile = url;
+        }
 
         this.setState({
             ...this.state,
