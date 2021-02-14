@@ -6,13 +6,21 @@ export const getMonthOptionsBetween = (date1: dayjs.Dayjs, date2: dayjs.Dayjs): 
     date1 = date1.set('date', 1);
     date2 = date2.set('date', 1);
 
-    while (date1.diff(date2, 'month')) {
+    loopDates(date1, date2, (date: dayjs.Dayjs) => {
         options.push({
-            name: date1.format('MMMM YYYY'),
-            value: date1.format('MMMM YYYY')
+            name: date.format('MMMM YYYY'),
+            value: date.format('MMMM YYYY')
         });
+    });
+
+    return options;
+}
+
+export const loopDates = (date1: dayjs.Dayjs, date2: dayjs.Dayjs, callable: (date: dayjs.Dayjs) => void): void => {
+    while (date1.diff(date2, 'month')) {
+        callable(date1);
         date1 = date1.add(1, 'month');
     }
 
-    return options;
+    callable(date1);
 }
