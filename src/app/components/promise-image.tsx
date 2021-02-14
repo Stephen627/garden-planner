@@ -22,7 +22,7 @@ const PromiseImage = (props: Props) => {
         return <span className={props.className}><Loading /></span>;
     }
 
-    return <img className={props.className} src={imageUrl} alt={props.alt} />;
+    return <img draggable={false} className={props.className} src={imageUrl} alt={props.alt} />;
 };
 
 export default PromiseImage;

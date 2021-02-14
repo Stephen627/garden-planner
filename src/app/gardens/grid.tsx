@@ -48,7 +48,8 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
                     plant: null,
                     plantData: {
                         name: null,
-                        icon: null
+                        icon: null,
+                        hardiness: null
                     }
                 } : cellContents[j][i];
 

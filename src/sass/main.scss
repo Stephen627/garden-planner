@@ -13,3 +13,12 @@ body {
   font-weight: 400;
   line-height: 1.7;
 }
+
+img {
+  pointer-events: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none; 
+}

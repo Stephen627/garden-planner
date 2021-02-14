@@ -9,7 +9,7 @@ export interface Props {
     options: Option[];
     className?: string;
     onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-    value?: string;
+    value?: any;
     provideDefault?: boolean;
 }
 
