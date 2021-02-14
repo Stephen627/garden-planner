@@ -30,7 +30,17 @@ class CellModal extends React.Component<Props, State> {
 
     onCellValueChange (evt: React.ChangeEvent<HTMLInputElement|HTMLSelectElement>, key: keyof CellContent) {
         const cell = { ...this.state.cell };
-        cell[key] = evt.target.value;
+
+        switch (key) {
+            case 'plantData':
+                // Plant data is not assignable this way
+                break;
+            case 'background':
+            case 'plant':
+            default:
+                cell[key] = evt.target.value;
+                break;
+        }
 
         this.setState({
             ...this.state,

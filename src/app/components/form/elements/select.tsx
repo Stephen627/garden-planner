@@ -19,16 +19,13 @@ const Select: React.FC<Props> = (props: Props) => {
             key: option.value,
             value: option.value
         };
-        if (option.value === props.value) {
-            optionProps['selected'] = 'selected';
-        }
 
         return <option {...optionProps}>
             {option.name}
         </option>;
     });
 
-    return <select className={props.className} onChange={props.onChange}>
+    return <select className={props.className} onChange={props.onChange} value={props.value}>
         { props.provideDefault ? <option value="">-- None --</option> : ''}
         {options}
     </select>;

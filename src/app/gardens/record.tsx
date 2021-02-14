@@ -119,7 +119,13 @@ class Garden extends React.Component<GardenProps, GardenState> {
                     onChange={(evt) => this.setState({ ...this.state, month: evt.target.value })}
                 />
             </h4>
-            <GardenGrid cellContents={garden.cells[this.state.month] || []} onCellClick={this.onCellClick} width={garden.width} height={garden.height}></GardenGrid>
+            <GardenGrid
+                cellContents={garden.cells[this.state.month] || []}
+                onCellClick={this.onCellClick}
+                width={garden.width}
+                height={garden.height}
+                plants={this.props.plants}
+            />
             {
                 this.state.showSettings
                     && <Settings
