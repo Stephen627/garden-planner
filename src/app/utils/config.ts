@@ -5,7 +5,7 @@ class Config {
     private static instance: Config;
     protected data: any;
 
-    private constructor () {
+    protected constructor () {
         this.data = config;
     }
 

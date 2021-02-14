@@ -4,6 +4,7 @@ import Plant from '../utils/database/plant';
 import { storage } from '../utils/storage';
 import { Auth } from '../utils/user';
 import { Coords } from './grid';
+import promiseKeeper from '../utils/promise-keeper';
 
 export interface CellProps {
     coords: Coords;
@@ -24,7 +25,13 @@ export const Cell: React.FC<CellProps> = (props) => {
 
     const getImagePromise = (url: string): Promise<string> => {
         const uid = Auth.currentUser().uid;
-        return storage.get(`${uid}/${url}`);
+        if (!promiseKeeper.get(url)) {
+            const promise = storage.get(`${uid}/${url}`);
+            promiseKeeper.set(url, promise);
+        }
+        return new Promise(resolve => {
+            resolve(promiseKeeper.get(url));
+        });
     }
 
     return <div onClick={props.onClick} className={classes.join(' ')} data-x={props.coords.x} data-y={props.coords.y}>
