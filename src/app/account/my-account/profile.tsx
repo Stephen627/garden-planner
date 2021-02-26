@@ -55,7 +55,6 @@ const Profile = () => {
             return;
         }
         const file = evt.target.files[0];
-        console.log(file);
         setProfile(file);
     }
     
