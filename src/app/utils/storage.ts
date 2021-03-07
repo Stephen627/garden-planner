@@ -6,7 +6,7 @@ import Config from './config';
 
 const storage = new Storage();
 
-switch (Config.get('db_adapter')) {
+switch (Config.get('storage_adapter')) {
     case 'local':
         const localAdapater = new LocalAdapter();
         storage.setAdapter(localAdapater);
