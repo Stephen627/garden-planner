@@ -69,7 +69,7 @@ export class GardenGrid extends React.Component<GardenGridProps, GardenGridState
             rows.push(<div key={i} className="flex flex-row justify-center">{cells}</div>);
         }
         return <div className="grid overflow-auto">
-            <div ref={this.gridRef} className="py-4 w-screen">{rows}</div>
+            <div ref={this.gridRef} className="py-4">{rows}</div>
             <Selecto
                 container={this.gridRef.current}
                 dragContainer={this.gridRef.current}
