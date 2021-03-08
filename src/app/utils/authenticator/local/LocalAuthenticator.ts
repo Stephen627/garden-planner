@@ -5,7 +5,7 @@ import UserCredentials from '../user/user-credential-interface';
 
 class FirebaseAuthenticator implements AuthenticatorInterface {
     private authenticated: boolean = false;
-    private onAuthChangeFunc: Function = null;
+    private onAuthChangeFunc: Function = () => {};
 
     public onAuthChange (callback: any) {
         this.onAuthChangeFunc = callback;
