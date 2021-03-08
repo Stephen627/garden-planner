@@ -5,7 +5,7 @@ import Config from './config';
 
 const Auth = new Authenticator();
 
-switch (Config.get('storage_adapter')) {
+switch (Config.get('auth_adapter')) {
     case 'local':
         const localAuth = new LocalAuthenticator();
         Auth.setAuthenticator(localAuth);
