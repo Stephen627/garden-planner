@@ -48,7 +48,7 @@ class LocalDatabase implements DatabaseInterface {
     private generateUniqueKey (keys: string[]): string {
         let key: string = '';
         do {
-            key = Math.random().toString(32);
+            key = Math.random().toString(32).slice(2);
         } while (keys.indexOf(key) !== -1);
 
         return key;
