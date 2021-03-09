@@ -1,6 +1,7 @@
 import AuthenticatorInterface from '../authenticator-interface';
 import User from '../user/user-interface';
 import UserCredentials from '../user/user-credential-interface';
+import { disableGuestMode } from '../guest-mode';
 
 
 class FirebaseAuthenticator implements AuthenticatorInterface {
@@ -44,6 +45,7 @@ class FirebaseAuthenticator implements AuthenticatorInterface {
     public signout (): Promise<void> {
         return new Promise((resolve) => {
             this.setAuthenticated(false);
+            disableGuestMode();
             this.onAuthChangeFunc({});
             resolve();
         });
