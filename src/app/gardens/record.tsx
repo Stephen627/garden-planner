@@ -57,13 +57,13 @@ class Garden extends React.Component<GardenProps, GardenState> {
     }
 
     componentDidMount () {
-        const uid = Auth.currentUser().uid || null;
+        const uid = Auth.currentUser().uid;
         this.props.getGardens(uid);
         this.props.getPlants(uid);
     }
 
     onSettingsSubmit (garden: GardenModel) {
-        const uid = Auth.currentUser().uid || null;
+        const uid = Auth.currentUser().uid;
 
         const gardens = this.props.gardens;
         gardens[this.id] = garden;
