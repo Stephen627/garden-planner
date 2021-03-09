@@ -8,10 +8,12 @@ class FirebaseAuthenticator implements AuthenticatorInterface {
 
     public onAuthChange (callback: any) {
         this.onAuthChangeFunc = callback;
+
+        callback();
     }
 
     public isAuthenticated (): boolean {
-        return !!localStorage.getItem('authenticated');
+        return localStorage.getItem('authenticated') === '1';
     }
 
     public currentUser (): User | null {

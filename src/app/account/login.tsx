@@ -3,16 +3,11 @@ import { Link, Redirect } from 'react-router-dom';
 
 import { __ } from '../utils/lang';
 import { Auth } from '../utils/user';
-import LocalAuthenticator from '../utils/authenticator/local/LocalAuthenticator';
-import { storage } from '../utils/storage';
-import LocalStorage from '../utils/storage/local/LocalStorage';
-import { db } from '../utils/db';
-import LocalDatabase from '../utils/database/local/LocalDatabase';
-import config from '../utils/config';
 import AuthError from '../utils/authenticator/auth-error-interface';
 import { HOME_URL } from '../routes';
 import { Page } from '../layouts/not-logged-in';
 import Form from '../components/form';
+import { enableGuestMode } from '../utils/authenticator/guest-mode';
 
 export interface LoginProps {
 }
@@ -75,14 +70,9 @@ class Login extends React.Component<LoginProps, LoginState> {
     }
 
     loginAsGuest () {
-        config.set('auth_adapter', 'local');
-        Auth.setAuthenticator(new LocalAuthenticator());
-        config.set('db_adapter', 'local');
-        db.setAdapter(new LocalDatabase());
-        config.set('storage_adapter', 'local');
-        storage.setAdapter(new LocalStorage());
-
+        enableGuestMode();
         Auth.authenticate('', '');
+
         this.setState({
             ...this.state,
             toDashboard: true

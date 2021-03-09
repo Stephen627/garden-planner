@@ -13,11 +13,17 @@ import reducers from './reducers';
 import { pages } from './routes';
 import Loading from './components/loading';
 import { Auth } from './utils/user';
+import { enableGuestMode } from './utils/authenticator/guest-mode';
 
 import './utils/firebase';
 
 const App = () => {
     const [ loaded, setLoaded ] = useState(false);
+
+    if (localStorage.getItem('guest_mode') === '1') {
+        enableGuestMode();
+    }
+
     useEffect(() => {
         Auth.onAuthChange(() => {
             setLoaded(true);
