@@ -156,7 +156,7 @@ export class Header extends React.Component<HeaderProps, HeaderState> {
                             to={ACCOUNT_URL}
                             className="w-full flex items-center justify-center px-4 py-2 mb-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700"
                         >{ __('My Account') }</Link>
-                        <a href="#" className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700">
+                        <a href="#" onClick={this.onSignOutClick} className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary-600 hover:bg-primary-700">
                             { __('Sign out') }
                         </a>
                     </div>
