@@ -4,7 +4,6 @@ import UserCredentials from '../user/user-credential-interface';
 
 
 class FirebaseAuthenticator implements AuthenticatorInterface {
-    private authenticated: boolean = false;
     private onAuthChangeFunc: Function = () => {};
 
     public onAuthChange (callback: any) {
@@ -12,7 +11,7 @@ class FirebaseAuthenticator implements AuthenticatorInterface {
     }
 
     public isAuthenticated (): boolean {
-        return this.authenticated;
+        return !!localStorage.getItem('authenticated');
     }
 
     public currentUser (): User | null {
@@ -26,7 +25,7 @@ class FirebaseAuthenticator implements AuthenticatorInterface {
 
     public authenticate (email: string, password: string): Promise<UserCredentials> {
         return new Promise((resolve) => {
-            this.authenticated = true;
+            this.setAuthenticated(true);
             this.onAuthChangeFunc({});
             resolve({});
         });
@@ -34,7 +33,7 @@ class FirebaseAuthenticator implements AuthenticatorInterface {
 
     public register (email: string, password: string): Promise<UserCredentials> {
         return new Promise((resolve) => {
-            this.authenticated = true;
+            this.setAuthenticated(true);
             this.onAuthChangeFunc({});
             resolve({});
         });
@@ -42,10 +41,14 @@ class FirebaseAuthenticator implements AuthenticatorInterface {
 
     public signout (): Promise<void> {
         return new Promise((resolve) => {
-            this.authenticated = false;
+            this.setAuthenticated(false);
             this.onAuthChangeFunc({});
             resolve();
         });
+    }
+
+    private setAuthenticated (authenticated: boolean): void {
+        localStorage.setItem('authenticated', authenticated ? '1' : '0');
     }
 }
 
