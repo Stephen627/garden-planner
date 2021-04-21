@@ -57,13 +57,13 @@ class Garden extends React.Component<GardenProps, GardenState> {
     }
 
     componentDidMount () {
-        const uid = Auth.currentUser().uid || null;
+        const uid = Auth.currentUser().uid;
         this.props.getGardens(uid);
         this.props.getPlants(uid);
     }
 
     onSettingsSubmit (garden: GardenModel) {
-        const uid = Auth.currentUser().uid || null;
+        const uid = Auth.currentUser().uid;
 
         const gardens = this.props.gardens;
         gardens[this.id] = garden;
@@ -100,6 +100,8 @@ class Garden extends React.Component<GardenProps, GardenState> {
 
         const cell = this.state.editingCells && typeof garden.cells !== 'undefined' &&
             this.state.editingCells.length === 1 &&
+            typeof garden.cells !== 'undefined' &&
+            garden.cells &&
             typeof garden.cells[this.state.month] !== 'undefined' &&
             typeof garden.cells[this.state.month][this.state.editingCells[0].x] !== 'undefined' &&
             typeof garden.cells[this.state.month][this.state.editingCells[0].x][this.state.editingCells[0].y] !== 'undefined'

@@ -36,12 +36,12 @@ class Gardens extends React.Component<GardensProps, GardensState> {
     }
 
     componentDidMount () {
-        const uid = Auth.currentUser().uid || null;
+        const uid = Auth.currentUser().uid;
         this.props.getGardens(uid);
     }
 
     onGardenListChange (gardens: { [key: string]: Garden}) {
-        const uid = Auth.currentUser().uid || null;
+        const uid = Auth.currentUser().uid;
         this.props.updateGardens(uid, gardens);
     }
 

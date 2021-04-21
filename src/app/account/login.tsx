@@ -7,6 +7,7 @@ import AuthError from '../utils/authenticator/auth-error-interface';
 import { HOME_URL } from '../routes';
 import { Page } from '../layouts/not-logged-in';
 import Form from '../components/form';
+import { enableGuestMode } from '../utils/authenticator/guest-mode';
 
 export interface LoginProps {
 }
@@ -25,6 +26,7 @@ class Login extends React.Component<LoginProps, LoginState> {
         this.onFormSubmit = this.onFormSubmit.bind(this);
         this.onEmailChange = this.onEmailChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
+        this.loginAsGuest = this.loginAsGuest.bind(this);
 
         this.state = {
             toDashboard: false,
@@ -56,12 +58,24 @@ class Login extends React.Component<LoginProps, LoginState> {
             this.state.password
         ).then(() => {
             this.setState({
+                ...this.state,
                 toDashboard: true
             });
         }).catch((err: AuthError) => {
             this.setState({
+                ...this.state,
                 error: __(err.code)
             });
+        });
+    }
+
+    loginAsGuest () {
+        enableGuestMode();
+        Auth.authenticate('', '');
+
+        this.setState({
+            ...this.state,
+            toDashboard: true
         });
     }
 
@@ -96,8 +110,11 @@ class Login extends React.Component<LoginProps, LoginState> {
                         </div>
                     </Form.Group>
                     <div className="col-span-4 mt-4 flex justify-between">
-                        <Form.Submit className="bg-primary-600 hover:bg-primary-700 text-white text-base font-medium px-4 py-2 rounded-md shadow-sm" value={__('Login')} />
-                        <Link className="bg-secondary-600 hover:bg-secondary-700 text-white text-base font-medium px-4 py-2 rounded-md shadow-sm" to="/register">{ __('Click here to register') }</Link>
+                        <Form.Submit className="bg-primary-600 hover:bg-primary-700 text-white text-base font-medium px-4 py-2 rounded-md shadow-sm h-10" value={__('Login')} />
+                        <div className="flex flex-col">
+                            <Link className="mb-2 bg-secondary-600 hover:bg-secondary-700 text-white text-base font-medium px-4 py-2 rounded-md shadow-sm" to="/register">{ __('Click here to register') }</Link>
+                            <a href="#" className="bg-secondary-600 hover:bg-secondary-700 text-white text-base font-medium px-4 py-2 rounded-md shadow-sm" onClick={this.loginAsGuest}>{ __('Continue as guest') }</a>
+                        </div>
                     </div>
                 </div>
             </Form>

@@ -4,5 +4,6 @@
     "auth/weak-password": "Your password is too weak, it must be at least 6 characters",
     "auth/email-already-in-use": "That email address is already in use",
     "auth/wrong-password": "The credentials you entered are incorrect",
+    "auth/user-not-found": "User not found",
     "test phrase exists": "something else"
 }

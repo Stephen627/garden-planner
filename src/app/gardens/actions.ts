@@ -37,20 +37,17 @@ export const updateCell = (userId: string, gardenId: string, month: string, coor
 }
 
 export const updateCells = (userId: string, gardenId: string, month: string, coords: Coords[], cellContents: CellContent) => {
-    return (dispatch: Function) => {
+    return async (dispatch: Function) => {
         dispatch(setLoading(true));
         const promises: Promise<any>[] = [];
 
-        coords.forEach((coord: Coords) => {
-            promises.push(
-                db.set(`${userId}/gardens/${gardenId}/cells/${month}/${coord.x}/${coord.y}`, cellContents)
-            );
-        });
+        for (let i = 0; i < coords.length; i++) {
+            const coord = coords[i];
+            await db.set(`${userId}/gardens/${gardenId}/cells/${month}/${coord.x}/${coord.y}`, cellContents)
+        }
 
-        Promise.all(promises).then(() => {
-            dispatch(getGardens(userId));
-            dispatch(setLoading(false));
-        })
+        dispatch(getGardens(userId));
+        dispatch(setLoading(false));
     }
 }
 
