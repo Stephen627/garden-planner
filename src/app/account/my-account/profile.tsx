@@ -72,7 +72,7 @@ const Profile = () => {
             });
         }
 
-        const uid = Auth.currentUser().uid || null;
+        const uid = Auth.currentUser().uid;
         return await storage.get(`${uid}/${url}`);
     }
 

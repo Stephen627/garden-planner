@@ -25,11 +25,34 @@ class LocalDatabase implements DatabaseInterface {
     }
 
     public set (ref: string, data: any): Promise<any> {
-        return new Promise((resolve) => {
-            localStorage.setItem(
-                this.formatRef(ref),
-                JSON.stringify(data)
-            );
+        return new Promise(async (resolve) => {
+            const formattedRef = this.formatRef(ref);
+            if (formattedRef.indexOf('/') === -1) {
+                localStorage.setItem(
+                    this.formatRef(ref),
+                    JSON.stringify(data)
+                );
+                resolve(true);
+                return;
+            }
+
+            const parts = formattedRef.slice(formattedRef.indexOf('/') + 1).split('/');
+            const baseRef = formattedRef.slice(0, formattedRef.indexOf('/'));
+            const currentData: any = await this.get(baseRef);
+            let newData: any = currentData;
+
+            for (let i = 0; i < parts.length - 1; i++) {
+                const elem = parts[i];
+                if (!newData[elem]) {
+                    newData[elem] = {};
+                }
+
+                newData = newData[elem];
+            }
+
+            newData[parts[parts.length - 1]] = data;
+
+            this.set(baseRef, currentData);
 
             resolve(true);
         });
@@ -42,7 +65,10 @@ class LocalDatabase implements DatabaseInterface {
     }
 
     private formatRef (ref: string): string {
-        return ref.slice(1);
+        if (ref.indexOf('/') === 0) {
+            return ref.slice(1);
+        }
+        return ref;
     }
 
     private generateUniqueKey (keys: string[]): string {

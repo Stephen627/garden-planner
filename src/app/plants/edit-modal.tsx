@@ -60,7 +60,7 @@ class PlantView extends React.Component<PlantViewProps, PlantViewState> {
     }
     
     async onUpdate () {
-        const uid = Auth.currentUser().uid || null;
+        const uid = Auth.currentUser().uid;
         const file = this.state.file;
         const plant = { ...this.state.plant };
 
@@ -106,7 +106,7 @@ class PlantView extends React.Component<PlantViewProps, PlantViewState> {
             });
         }
 
-        const uid = Auth.currentUser().uid || null;
+        const uid = Auth.currentUser().uid;
         return storage.get(`${uid}/${url}`);
     }
 
