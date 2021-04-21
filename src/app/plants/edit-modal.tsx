@@ -13,6 +13,7 @@ export interface PlantViewProps {
     plant: Plant;
     onClose: Function;
     onUpdate: Function;
+    title?: string;
 }
 
 export interface PlantViewState {
@@ -119,7 +120,7 @@ class PlantView extends React.Component<PlantViewProps, PlantViewState> {
                 value: key
             }
         });
-        return <Modal x-wide title="Edit Plant" submit="Update Plant" cancel="Cancel" onSubmit={this.onUpdate} onClose={this.props.onClose}>
+        return <Modal x-wide title="Edit Plant" submit={this.props.title || 'Update Plant'} cancel="Cancel" onSubmit={this.onUpdate} onClose={this.props.onClose}>
             <Form className="px-4 py-5 space-y-6 sm:p-6">
                 <div className="grid grid-cols-4 gap-6">
                     <Form.Group className="col-span-4">

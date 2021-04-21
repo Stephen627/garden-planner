@@ -67,6 +67,7 @@ class Plants extends React.Component<PlantsProps, PlantsState> {
             {this.state.addNewPlant && <PlantView
                 id={0}
                 plant={this.defaultPlant}
+                title="Add Plant"
                 onClose={() => { this.setState({ ...this.state, addNewPlant: false }) }}
                 onUpdate={(id: string, plant: Plant) => {
                     const uid = Auth.currentUser().uid;
