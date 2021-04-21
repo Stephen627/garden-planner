@@ -9,6 +9,7 @@ export interface Props {
     onSubmit: any;
     onClose: Function;
     garden: Garden;
+    title?: string;
 }
 
 const Settings = (props: Props) => {
@@ -33,7 +34,7 @@ const Settings = (props: Props) => {
         setGarden(editedGarden);
     };
 
-    return <Modal title="Settings" cancel="Cancel" submit="Update Garden" onSubmit={() => props.onSubmit(garden)} onClose={props.onClose}>
+    return <Modal title="Settings" cancel="Cancel" submit={props.title || 'Update Garden'} onSubmit={() => props.onSubmit(garden)} onClose={props.onClose}>
         <Form className="px-4 py-5 space-y-6 sm:p-6">
             <div className="grid grid-cols-4 gap-6">
                 <Form.Group className="col-span-4">

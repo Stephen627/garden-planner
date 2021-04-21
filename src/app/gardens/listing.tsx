@@ -8,6 +8,7 @@ import EntityCrud from '../components/entity-crud';
 import { __ } from '../utils/lang';
 import {  Redirect } from 'react-router-dom';
 import { GARDEN_URL } from '../routes';
+import GardenSettings from './settings';
 
 export interface GardensProps {
     gardens: { [key: string]: Garden };
@@ -17,6 +18,7 @@ export interface GardensProps {
 }
 
 export interface GardensState {
+    addNewGarden: boolean;
 }
 
 class Gardens extends React.Component<GardensProps, GardensState> {
@@ -33,6 +35,10 @@ class Gardens extends React.Component<GardensProps, GardensState> {
 
         this.onGardenListChange = this.onGardenListChange.bind(this);
         this.onGardenAdd = this.onGardenAdd.bind(this);
+
+        this.state = {
+            addNewGarden: false,
+        };
     }
 
     componentDidMount () {
@@ -46,12 +52,24 @@ class Gardens extends React.Component<GardensProps, GardensState> {
     }
 
     onGardenAdd (garden: Garden) {
-        const uid = Auth.currentUser().uid;
-        this.props.addGarden(uid, garden);
+        this.setState({
+            ...this.state,
+            addNewGarden: true
+        });
     }
 
     render () {
         return <Page title="Gardens">
+            {this.state.addNewGarden && <GardenSettings
+                onSubmit={(garden: Garden) => {
+                    const uid = Auth.currentUser().uid;
+                    this.props.addGarden(uid, garden);
+                    this.setState({ ...this.state, addNewGarden: false });
+                }}
+                onClose={() => { this.setState({ ...this.state, addNewGarden: false }) }}
+                garden={this.defaultGarden}
+                title="Add Garden"
+            />}
             <EntityCrud
                 entityNameSingular="Garden"
                 entityNamePlural="Gardens"
