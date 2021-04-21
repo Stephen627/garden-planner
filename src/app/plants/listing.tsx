@@ -16,7 +16,7 @@ export interface PlantsProps {
 }
 
 export interface PlantsState {
-
+    addNewPlant: boolean;
 }
 
 class Plants extends React.Component<PlantsProps, PlantsState> {
@@ -32,6 +32,10 @@ class Plants extends React.Component<PlantsProps, PlantsState> {
         this.onPlantListChange = this.onPlantListChange.bind(this);
         this.onPlantChange = this.onPlantChange.bind(this);
         this.onPlantAdd = this.onPlantAdd.bind(this);
+
+        this.state = {
+            addNewPlant: false,
+        };
     }
 
     componentDidMount () {
@@ -52,12 +56,27 @@ class Plants extends React.Component<PlantsProps, PlantsState> {
     }
 
     onPlantAdd (plant: Plant) {
-        const uid = Auth.currentUser().uid;
-        this.props.addPlant(uid, plant);
+        this.setState({
+            ...this.state,
+            addNewPlant: true
+        })
     }
 
     render () {
         return <Page title="Plants">
+            {this.state.addNewPlant && <PlantView
+                id={0}
+                plant={this.defaultPlant}
+                onClose={() => { this.setState({ ...this.state, addNewPlant: false }) }}
+                onUpdate={(id: string, plant: Plant) => {
+                    const uid = Auth.currentUser().uid;
+                    this.props.addPlant(uid, plant);
+                    this.setState({
+                        ...this.state,
+                        addNewPlant: false
+                    })
+                }}
+            />}
             <EntityCrud
                 entityNameSingular="Plant"
                 entityNamePlural="Plants"
